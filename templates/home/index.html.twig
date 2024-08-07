@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+{# on dégage les balises de styles et div et on ajoute le title h1  et le pseudo etc #}
+      <h1> Bienvenue {{ app.user.pseudo}} </h1>
+      <p> {{ app.user.email}} </p>
+{% endblock %}
