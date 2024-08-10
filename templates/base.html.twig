@@ -29,8 +29,7 @@
         <link rel="stylesheet" href="{{asset('css/layout.css')}}">
         <link rel="stylesheet" href="{{asset('css/homePage.css')}}">
         <link rel="stylesheet" href="{{asset('css/user.css')}}">
-        <link rel="stylesheet" href="{{asset('css/artistPages.css')}}">
-        <link rel="stylesheet" href="{{asset('css/studios.css')}}">
+        <link rel="stylesheet" href="{{asset('css/photographerPages.css')}}">
         <link rel="stylesheet" href="{{asset('css/events.css')}}">
         <link rel="stylesheet" href="{{asset('css/formPages.css')}}">
         <link rel="stylesheet" href="{{asset('css/indexPages.css')}}">
@@ -51,7 +50,7 @@
         <aside id="aboutUs">
             <div>
                 <h3>PHOTOCLUB</h3>
-                <p>There is the comunity of professional photographers, students and simply amateurs showing their artworks, tooking part in events, exhibitions, and workshops, renting or sharing workspaces and inspiring one other.</p>
+                <p>There is the comunity of professional photographers, students and simply amateurs showing their artworks, tooking part in events, publishing their photos and inspiring one other.</p>
                 <div class='button btn4'>************************</div>
                 <div class="socials">
                     <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
@@ -72,12 +71,8 @@
 
             <div class="nav-links">
                 <div>
-                    <p><a href="{{ path('app_artist') }}">GALLERY</a></p>
+                    <p><a href="{{ path('app_photographer') }}">GALLERY</a></p>
                     <p><a href="{{ path('app_event') }}">EVENTS</a></p>
-                    <p><a href="{{ path('app_exposition') }}">EXPOSITIONS</a></p>
-                    <p><a href="{{ path('app_workshop') }}">WORKSHOPS</a></p>
-          
-                    <p><a href="{{ path('app_studio') }}">WORKSPACES</a></p>
                     <p><a href="{{ path('app_calendar') }}">SCHEDULE</a></p>
                 </div>
             </div>
@@ -94,16 +89,12 @@
                         <div class="dropdown-content">
                             <p><a href="{{ path('show_user', {slug: app.user.slug }) }}">PROFIL</a></p>
 
-                            {% if is_granted('ROLE_ARTIST') %}
+                            {% if is_granted('ROLE_PHOTOGRAPHER') %}
                             <p><a href="{{ path('manage_profil', {slug: app.user.slug }) }}">USER PAGE</a></p>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
                             <p><a href="{{ path('app_dashboard')}}">DASHBOARD</a></p>
                             {% endif %}
-                            {% if is_granted('ROLE_SUPERVISOR') or is_granted('ROLE_ADMIN')  %}
-                            <p><a href="{{ path('studio_dashboard')}}">PLANNING</a></p>
-                            {% endif %}
-
                             <p><a href=" {{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</a></p>
                         </div>
                     </div>
@@ -132,11 +123,8 @@
         <header id="mobile-header">
             <div class="nav-links">
                 <div>
-                    <p><a href="{{ path('app_artist') }}">GALLERY</a></p>
+                    <p><a href="{{ path('app_photographer') }}">GALLERY</a></p>
                     <p><a href="{{ path('app_event') }}">EVENTS</a></p>
-                    <p><a href="{{ path('app_exposition') }}">EXPOSITIONS</a></p>
-                    <p><a href="{{ path('app_workshop') }}">WORKSHOPS</a></p>
-                    <p><a href="{{ path('app_studio') }}">WORKSPACES</a></p>
                     <p><a href="{{ path('app_calendar') }}">SHEDULE</a></p>
                 </div>
             </div>
@@ -149,8 +137,8 @@
         <div class="roles" style="display:none;">
         
      
-            {% if is_granted('ROLE_ARTIST') %}
-            {# If the user has the "ROLE_ARTIST" role, redirect to artist page management #}
+            {% if is_granted('ROLE_PHOTOGRAPHER') %}
+            {# If the user has the "ROLE_PHOTOGRAPHER" role, redirect to photographer's page management #}
             <a href="{{ path('manage_profil', {slug: app.user.slug }) }}"><i class="fa-solid fa-palette"></i></a>
             {% elseif is_granted('IS_AUTHENTICATED_FULLY') %}
             {% endif %}
@@ -221,7 +209,7 @@
             </div>
 
             <div id="image-footer">
-                <img src="{{ asset('images/visuals/footer.jpg') }}" alt="">
+                <img src="{{ asset('img/visuals/footer.jpg') }}" alt="">
             </div>
             
         </footer>

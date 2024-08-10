@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -54,9 +55,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $contacts;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $registration_date = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $last_login_date = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $author_infos = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $is_published = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $last_profil_edit_time = null;
+
+    /**
+     * @var Collection<int, Photo>
+     */
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'user')]
+    private Collection $photos;
+
+    /**
+     * @var Collection<int, EventParticipation>
+     */
+    #[ORM\OneToMany(targetEntity: EventParticipation::class, mappedBy: 'user')]
+    private Collection $eventParticipations;
+
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
+        $this->photos = new ArrayCollection();
+        $this->eventParticipations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -206,6 +236,126 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($contact->getUser() === $this) {
                 $contact->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRegistrationDate(): ?\DateTimeInterface
+    {
+        return $this->registration_date;
+    }
+
+    public function setRegistrationDate(?\DateTimeInterface $registration_date): static
+    {
+        $this->registration_date = $registration_date;
+
+        return $this;
+    }
+
+    public function getLastLoginDate(): ?\DateTimeInterface
+    {
+        return $this->last_login_date;
+    }
+
+    public function setLastLoginDate(?\DateTimeInterface $last_login_date): static
+    {
+        $this->last_login_date = $last_login_date;
+
+        return $this;
+    }
+
+    public function getAuthorInfos(): ?array
+    {
+        return $this->author_infos;
+    }
+
+    public function setAuthorInfos(?array $author_infos): static
+    {
+        $this->author_infos = $author_infos;
+
+        return $this;
+    }
+
+    public function getIsPublished(): ?int
+    {
+        return $this->is_published;
+    }
+
+    public function setIsPublished(?int $is_published): static
+    {
+        $this->is_published = $is_published;
+
+        return $this;
+    }
+
+    public function getLastProfilEditTime(): ?\DateTimeInterface
+    {
+        return $this->last_profil_edit_time;
+    }
+
+    public function setLastProfilEditTime(?\DateTimeInterface $last_profil_edit_time): static
+    {
+        $this->last_profil_edit_time = $last_profil_edit_time;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Photo>
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function addPhoto(Photo $photo): static
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+            $photo->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoto(Photo $photo): static
+    {
+        if ($this->photos->removeElement($photo)) {
+            // set the owning side to null (unless already changed)
+            if ($photo->getUser() === $this) {
+                $photo->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EventParticipation>
+     */
+    public function getEventParticipations(): Collection
+    {
+        return $this->eventParticipations;
+    }
+
+    public function addEventParticipation(EventParticipation $eventParticipation): static
+    {
+        if (!$this->eventParticipations->contains($eventParticipation)) {
+            $this->eventParticipations->add($eventParticipation);
+            $eventParticipation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventParticipation(EventParticipation $eventParticipation): static
+    {
+        if ($this->eventParticipations->removeElement($eventParticipation)) {
+            // set the owning side to null (unless already changed)
+            if ($eventParticipation->getUser() === $this) {
+                $eventParticipation->setUser(null);
             }
         }
 
