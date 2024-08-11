@@ -18,8 +18,11 @@
         {# Font Google #}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
-
+        <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=M+PLUS+1+Code:wght@100..700&display=swap"
+        rel="stylesheet">
+    
+      <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
         
         {% block stylesheets %}
         <link rel="stylesheet" href="{{asset('css/styles.css')}}">
@@ -45,43 +48,34 @@
     </head>
 
     <body>
+      <header>
 
-        {#   --ASIDE-- */#}
-        <aside id="aboutUs">
-            <div>
-                <h3>PHOTOCLUB</h3>
-                <p>There is the comunity of professional photographers, students and simply amateurs showing their artworks, tooking part in events, publishing their photos and inspiring one other.</p>
-                <div class='button btn4'>************************</div>
-                <div class="socials">
-                    <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="https://www.twitter.com"><i class="fa-brands fa-square-twitter"></i></a>
-                    <a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-        </aside>
+        <a href="index.php?action=accueil">
+            <figure id="logo-container">
+                <img src="{{ asset('img/logo.png') }}" alt="logo1">
+              <figcaption>
+                class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}">
+                    <a href="{{ path('app_home') }}">Photoclub</a>
+                
+              </figcaption>
+            </figure>
+          </a>
 
         {#   --NAVBAR-- */#}
+        <nav>
+         
+            <div id="close-button">
+                <i class="fa-solid fa-x"></i>
+            </div> 
 
-        <nav class="page-header">
-            <div class="name-app">
-                <p class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}">
-                    <a href="{{ path('app_home') }}">Photoclub</a>
-                </p>
-            </div>
-
-            <div class="nav-links">
-                <div>
-                    <p><a href="{{ path('app_photographer') }}">GALLERY</a></p>
-                    <p><a href="{{ path('app_event') }}">EVENTS</a></p>
-                    <p><a href="{{ path('app_calendar') }}">SCHEDULE</a></p>
-                </div>
-            </div>
-
-
-            <div id="burger-menu">
-                <div id="burger-icon">MENU</div>
-            </div>
+            <ul>  
+                <li class="link"><a href="{{ path('app_photographer') }}">GALLERY</a></li>
+                <li class="link"><a href="{{ path('app_event') }}">EVENTS</a></li>
+                <li class="link"><a href="{{ path('app_schedule') }}">SCHEDULE</a></li>
+                {# <li class="link"><a href="{{ path('app_contact')}}">CONTACT</a></li> */#} 
               
+            
+
             <div id="user-interface">
                 {% if app.user %}
                     <div class="dropdown">
@@ -108,6 +102,16 @@
                 </div>
                 {% endif %}
             </div>
+
+            </ul>
+ 
+            <div id="toggle-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>            
+                        
+      
+              
+
             
 
             <div class="nav-menu">
@@ -120,17 +124,22 @@
             </div>
         </nav>
 
-        <header id="mobile-header">
-            <div class="nav-links">
-                <div>
-                    <p><a href="{{ path('app_photographer') }}">GALLERY</a></p>
-                    <p><a href="{{ path('app_event') }}">EVENTS</a></p>
-                    <p><a href="{{ path('app_calendar') }}">SHEDULE</a></p>
-                </div>
-            </div>
-        </header>
-        
+      </header>
 
+        
+        {#   --ASIDE-- */#}
+        <aside id="aboutUs">
+            <div>
+                <h3>PHOTOCLUB</h3>
+                <p>There is the comunity of professional photographers, students and simply amateurs showing their artworks, tooking part in events, publishing their photos and inspiring one other.</p>
+                <div class='button btn4'>************************</div>
+                {# <div class="socials">
+                    <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.twitter.com"><i class="fa-brands fa-square-twitter"></i></a>
+                    <a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
+                </div>*/#}
+            </div>
+        </aside>
 
         {#   --CONTENT-- */#}
 
@@ -162,7 +171,9 @@
                 <p>Error ! {{ message }}</p> 
             </div>
             {% endfor %} 
-        
+    
+ 
+            
         <div class="main">
             {% block body %}
             {% endblock %}
@@ -173,32 +184,41 @@
 
         {#   --FOOTER-- */#}
 
-        <div id="top-footer"></div>
-
-        <footer >
-            <div id="footer-separator"></div>
-
-            <div id="footer-content">
+        <footer class="footer">
+            <div id="footerContainer">
                 <div>
-                    <p id="name-nav">PHOTOCLUB</p>
-                </div>
+                    <a href="#">
+                      <figure id="logo-container">
+                        <img src="{{ asset('img/logo.png') }}" alt="logo2">
+                        <figcaption>
+                          Photoclub
+                        </figcaption>
+                      </figure>
+                    </a>
+            
+                    <p id="footerDescription">
+                      We admire the photography!
+                    </p>
+                  </div>
     
                 <div id="footer-links">
                     <a href="{{ path('app_home')}}">HOME</a>
-                    <a href="{{ path('app_home')}}">ABOUT</a>
-                    <a href="{{ path('app_contact')}}">CONTACT</a>
+                    <a href="{{ path('app_home')}}">ABOUT US</a>
+                   {#  <a href="{{ path('app_contact')}}">CONTACT</a> */#}
                 </div>
     
                 <div id="footer-links-conditions">
+                    {# 
                     <a href="{{ path('app_terms_of_use')}}">Terms of Use</a>
                     <a href="{{ path('app_privacy_policy')}}">Privacy Policy</a>
-                    <a href="{{ path('app_sitemap')}}">Sitemap</a>
+                    <a href="{{ path('app_sitemap')}}">Sitemap</a> */#}
                     
                 </div>
     
-                <div id="footer-rights">
-                    <p> <small style="font-size: 1.2rem;">©</small>  <span id="footer-date"></span> <span id="name-rights">PHOTOCLUB</span>. All pictures of this site are free of copywrite </a></p>
-                </div>
+                <p class="copy link">
+                     <small style="font-size: 1.2rem;">©</small>  <span id="footer-date"></span> <span id="name-rights">Photoclub</span>. All pictures of this site are free of copywrite </a>
+                    
+                </p>
     
                 <div class="socials" id="footer-socials">
                     <a href="https://www.facebook.com"><i class="fa-brands fa-facebook "></i></a>
@@ -214,6 +234,191 @@
             
         </footer>
 
+
+    {#/*  --SCRIPT-- */#}
+
+    {# MenuBurger #}
+        <script src="{{ asset('js/menuBurger.js') }}"></script>
+
+    {# MenuBurger #}
+    <script src="{{ asset('js/carousel.js') }}"></script>        
+
+    {# Jquery #}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/gwl.js') }}"></script>
+
+    {# FullCalendar #}
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+    <script src="{{ asset('js/calendar.js') }}"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+
+    {# Gsap #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+
+            // switch pattern footer depending on the body color
+            var bodyBgColor = $('body').css('background-color');
+    
+            if (bodyBgColor.includes("21")) { 
+                $('#top-footer').css('background-image', "url('/images/visuals/film-strip-on.webp')");
+            } else if (bodyBgColor.includes("249")) { 
+                $('#top-footer').css('background-image', "url('/images/visuals/film-strip.webp')");
+            }
+
+
+            // add a color on links in the navbar
+            var currentUrl = window.location.href;
+            $('nav p a').each(function() {
+                var href = $(this).attr('href');
+                if (currentUrl.includes(href)) {
+                    $(this).addClass("highlight");
+                }
+            });
+            
+            
+            // show menu burger + animation for the links in the hamburger menus
+            $('#burger-icon').click(function() {
+                $('#mobile-header').toggleClass('nav-active');
+            
+                // Select all links within '.nav-links'
+                $('#mobile-header .nav-links a').each(function(index) {
+                    var link = $(this);
+            
+                    // Reset the color of the links when hiding them
+                    if ($('#mobile-header').hasClass('nav-active')) {
+                        setTimeout(function() {
+                            link.css('color', '#F9F9F9'); 
+                        }, 200 + index * 100); // Start after 200ms, then increase by 200ms for each link
+                    } else {
+                        link.css('color', '#151515'); // Reset the color of the link
+                    }
+                });
+            })
+
+            
+        });
+
+        setTimeout(function() {
+            gsap.to(".name-app", {
+                keyframes: [
+                    { backgroundPosition: "100% 0%", ease: "none", duration: 0 }, 
+                    { backgroundPosition: "0% 0%", ease: "none", duration: 0.5 }, 
+                    { backgroundPosition: "100% 0%", ease: "none", duration: 1 } 
+                ],
+                repeat: -1, // infinite repeat
+                repeatDelay: 8 // seconds between repetition
+            });
+        }, 2000);
+
+
+        if(document.querySelector('.breadcrumb')) {
+            gsap.from(".breadcrumb", {
+                opacity: 0, 
+                duration: 1.2, 
+                ease: "easeInOut", 
+                delay: 1.2
+            });
+
+        }
+
+        // animation background footer on scroll
+        document.addEventListener("DOMContentLoaded", function() {
+            gsap.set("#top-footer", {opacity: 0}); 
+            gsap.set("#image", {opacity: 0}); 
+            const footerAnimation = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#top-footer",
+                start: "top 60%",
+                end: "bottom 40%",
+                //markers: true
+            }
+            });
+    
+            footerAnimation.to("#top-footer", {
+            opacity: 1,
+            ease: "power4.out",
+            delay: 0.3,
+            onComplete: function() {
+                gsap.to("#image-footer img", {
+                opacity: 1,
+                ease: "power4.out",
+                delay: 0.1,
+                });
+            }
+            });
+        });
+            
+        // aside modale
+        $(document).ready(function() {
+            var isClicked = false;
+        
+            $('.nav-menu a').click(function() {
+                if (!isClicked) {
+                    // 1° fois que l'élément est cliqué
+                    $('.nav-menu a div').css('background-color', '#FFFFFF');
+                    $('.nav-menu a div:nth-child(1)').css('transform', 'translateY(0.55rem) rotate(-45deg)');
+                    $('.nav-menu a div:nth-child(2)').css('transform', 'rotate(45deg)');
+                    $('.nav-menu a div:nth-child(3)').css('transform', 'translateY(-0.5rem) rotate(-45deg)');
+                    $('aside').css('right', '0');
+                } else {
+                    // Deuxième fois que l'élément est cliqué (réinitialiser)
+                    $('.nav-menu a div').css('background-color', '');
+                    $('.nav-menu a div').css('transform', '');
+                    $('aside').css('right', '-28rem');
+                }
+        
+                // Inverser l'état de la variable isClicked
+                isClicked = !isClicked;
+            });
+
+            // date (footer)
+            var currentYear = new Date().getFullYear();
+            $('#footer-date').text(currentYear);
+    
+        
+        });
+
+        // back-to-top button
+        var btn = $('#back-top-btn');
+        // When the user scrolls the page
+        $(window).scroll(function() {
+        // If the scroll position is greater than 300 pixels
+        if ($(window).scrollTop() > 300) { 
+            btn.addClass('show'); // Show the button
+        } else {
+            btn.removeClass('show'); // hide the button
+        }
+        });
+        // When the button is clicked
+        btn.on('click', function(e) {
+        // Prevent the default click behavior
+        e.preventDefault();
+        // Animation to scroll the page to the top (300ms)
+        $('html, body').animate({scrollTop:0}, '300');
+        });
+                
+
+        // animation text banner 
+         // Ajouter la classe "visible" au titre du header pour déclencher l'animation
+        $('.banner-title').addClass('visible');
+        $('.banner-text').addClass('visible');
+
+
+        if(document.querySelector('.banner')) {
+            gsap.from(".banner", {
+                opacity: 0,
+                duration: 2,
+                ease: "easeInOut", 
+                delay: 0.6
+            });
+        }
+        
+    
+    </script>
     </body>
 
 </html>
