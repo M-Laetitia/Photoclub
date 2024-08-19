@@ -21,13 +21,20 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 # On décommente la ligne au-désous et on remplace 'app-any_route' par 'app_login'
-                target: app_login
+                target: app_home
 
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
                 path: /
                 always_remember_me: true
+
+            # configure the maximum login attempts
+            #login_throttling:
+            #    max_attempts: 8          # per minute ...
+            #    interval: '15 minutes' # ... or in a custom period
+
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -42,6 +49,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/role_photographer, roles: ROLE_PHOTOGRAPHER }
 
 when@test:
     security:

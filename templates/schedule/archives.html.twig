@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search Past Activities - PHOTOCLUB{% endblock %}
+{% block meta %}Search the archived datas of PHOTOCLUB's' past activities.{% endblock %}
+
+{% block body %}
+
+<div class="banner">
+    <div class="content">
+        <h1 class="banner-title">Past activites >></h1>
+        <div class="subtitle">
+            <p class="banner-text">Welcome to the past and get in a good mood !</p>
+           
+        </div>
+    </div>
+</div>
+
+<section class="content" id="archives">
+
+    <div class="categories" id="categories-past-events">
+        <p id="showAllEvents">Events</p>
+        <p id="showAllExpos" >Expositions</p>
+        <p id="showAll" >All</p>
+
+        <button id="reset-btn" type="submit" name="formResetType" value="reset">Reset</button>
+    </div>
+
+    <div id="container-last-events">
+        
+        {% for latestEvent in latestEvents %}
+        <div class="event-container event-container-animation">
+
+            {% if latestEvent.type is defined and latestEvent.type == 'EVENT' %}
+                {% for photo in latestEvent.photos %}
+
+                {% if photo.type != 'photo' %}
+                <figure>
+                    <img src="{{ asset('img/activity/event/' ~ latestEvent.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                </figure>
+                {% endif %}
+                {% endfor %}
+            
+            {% elseif latestEvent.type is defined and latestEvent.type == 'EXPO' %}
+                {% for photo in latestEvent.photos %}
+                {% if photo.type != 'photo' %}
+                <figure>
+                    <img src="{{ asset('img/activity/expo/' ~ latestEvent.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                </figure>
+                {% endif %}
+                {% endfor %}
+
+            {% endif %}
+
+           
+            <div class="content">
+                {% if latestEvent.type is defined and latestEvent.type == 'EVENT' %}
+                    <p class="type">Event</p>
+                    <h2 class="text-n2">{{latestEvent.name}}</h2>
+                    <p>{{latestEvent.startDate}} <span> --> </span> {{latestEvent.endDate}} </p>
+                {% elseif latestEvent.type is defined and latestEvent.type == 'EXPO' %}
+                    <p class="type">exposition</p>
+                    <h2 class="text-n2">{{latestEvent.name}}</h2>
+                        <p>{{latestEvent.startDate}} <span> --> </span> {{latestEvent.endDate}}</p>
+                {% else %}
+                    <p class="type">workshop</p>
+                    <h2 class="text-n2">{{latestEvent.name}}</h2>
+                    <p>{{latestEvent.startDate}} <span> --> </span> {{latestEvent.endDate}}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <div id="container-archives">
+        <div id="results-archives"></div>
+    </div>
+</section>
+
+
+<script>
+    $(document).ready(function() {
+        $('#reset-btn').click(function() {
+            window.location.reload(); // Recharge la page actuelle
+        });
+     });
+
+    // ARCHIVED EVENTS
+    $(document).ready(function() {
+        function toggleEvents(url) {
+            var container = $('#container-last-events');
+            if (container.css('display') !== 'none') {
+                container.css('display', 'none');
+            }
+            $.ajax({
+                url: url,
+                method: 'POST',
+                dataType: 'json',
+                success: function(response) {
+                    $('#results-archives').empty();
+                    response.forEach(function(item) {
+                        var eventType = '';
+                        var imagePath = '';
+                        if (item.type === 'EVENT') {
+                            eventType = 'Event';
+                            var imagePath = 'img/activity/archived/banner/event' +  item.id + '.webp';
+                        } else if (item.type === 'EXPO') {
+                            eventType = 'exposition';
+                            var imagePath = 'img/activity/archived/banner/exposition' +  item.id + '.webp';
+                        } 
+                        
+    
+                        var html = '<div class="event-container">' +
+                            '<figure>' +
+                            '<img src="' + imagePath + '" alt="' + item.name + '">' +
+                            '</figure>' +
+                            '<div class="content">' +
+                            '<p class="type">' + eventType + '</p>' +
+                            '<h2 class="text-n2"><a href="/archived/expostion/' + item.slug + '">' + item.name + '</a></h2>' +
+                            '<p>' + item.startDate + ' <span> | </span> ' + item.endDate + '</p>' +
+                            '</div>' +
+                            '</div>';
+    
+                        $('#results-archives').append(html);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error while retrieving past content :', error);
+                }
+            });
+        }
+
+        $('#showAllExpos').click(function() {
+            toggleEvents('/all-past-expositions');
+        });
+
+        $('#showAllEvents').click(function() {
+            toggleEvents('/all-past-events');
+        });
+    
+        $('#showAll').click(function() {
+            toggleEvents('/all-past-content');
+        });
+    });
+
+    
+    gsap.from('.categories', 1.2, {opacity: 0, delay: 0.4 });
+
+    $(document).ready(function() {
+        // Select the first 4 photos and add the "visible" class to them
+        $('.event-container-animation:lt(4)').addClass('visible');
+        // Trigger animation for the remaining images based on scroll
+        $(window).scroll(function() {
+            $('.event-container-animation:not(.visible)').each(function() {
+                if ($(this).offset().top < $(window).scrollTop() + $(window).height() - 100) {
+                    $(this).addClass('visible');
+                }
+            });
+        });
+
+    });
+</script>
+
+{% endblock %}

@@ -2,9 +2,14 @@
 
 namespace App\Entity;
 
+use App\Entity\Contact;
+use App\Entity\Photo;
+use App\Entity\EventParticipation;
+use Cocur\Slugify\Slugify;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -29,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var list<string> The user roles
      */
     #[ORM\Column]
-    private array $roles = [];
+    private array $roles = ["ROLE_USER"];
 
     /**
      * @var string The hashed password
@@ -140,6 +145,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getSimpleRoles(): array
+    {
+        // fonction utiliser pour filtrer les éléments du tableau. Elle prend deux arguments : le tableau à filtrer ($this->getRoles() dans ce cas) et une fonction de rappel qui définit la condition de filtrage.
+        $filteredRoles = array_filter($this->getRoles(), function ($roles) {
+            // retourne true pour conserver un rôle et false pour l'exclure. Dans ce cas, on exclut le rôle "ROLE_USER".
+            return $roles !== 'ROLE_USER';
+        });
+
+        // applique une fonction donnée à chaque élément d'un tableau et retourne un nouveau tableau avec les résultats.
+        $simpleRoles = array_map(function ($roles) {
+
+            // utilisée pour formater chaque rôle restant. Elle convertit d'abord le rôle en minuscules (strtolower), puis retire le préfixe "ROLE_" et remplace les underscores par des espaces.
+            
+            return strtolower(str_replace(['ROLE_', '_'], ['', ' '], $roles));
+        }, $filteredRoles);
+
+        return $simpleRoles;
+    }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -198,6 +222,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function generateSlug(): string
+    {
+        $slugify = new Slugify();
+        return $slugify->slugify($this->getUsername());
     }
 
     public function getAvatar(): ?string

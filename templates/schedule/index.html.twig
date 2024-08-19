@@ -1,20 +1,265 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ScheduleController!{% endblock %}
+{% block title %}Explore Our Schedule{% endblock %}
+{% block meta %}Explore our schedule on PHOTOCLUB. Start your photo's adventure' now !{% endblock %}
+
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/laragon/www/Photoclub-2/src/Controller/ScheduleController.php</code></li>
-        <li>Your template at <code>C:/laragon/www/Photoclub-2/templates/schedule/index.html.twig</code></li>
-    </ul>
+<div class="banner">
+    <div class="content">
+        <h1 class="banner-title">OUR SCHEDULE >></h1>
+        <div class="subtitle">
+            <p class="banner-text">For better planning of your business and cultural life</p>
+           
+        </div>
+    </div>
 </div>
+    <p id="previous-link">To see all our previous activities <a href="{{ path('app_archives')}}">check here <i class="ri-arrow-right-double-fill"></i> </a> </p>
+
+<section class="content" id="schedule-page">
+    
+    <div id="schedule-container">
+        <div id="schedule-content">
+            <div id="schedule" data-formatted-events='{{ formattedEvents|raw }}'></div>
+        </div>
+        <div id="aside">
+            <div id="research">
+                {# <button>See archived events</button> #}
+                <div id="research-nav">
+                    <h3 class="text-n1">Browse through our activities</h3>
+            
+                    <div id="wrapper">
+                        <form method="GET" action="{{ path('app_schedule') }}">
+                            <label for="keyword">By keyword:</label>
+                            <input type="text" id="keyword" name="keyword" placeholder="Search..." minlength="4" required>
+                            <button class="btn btn6" type="submit" name="formSearchKeyword" value="keyword" >Search</button>
+                        </form>
+                        
+                        <form method="GET" action="{{ path('app_schedule') }}">
+                            <label for="type">Choose a type:</label>
+                            <select id="type" name="type">
+                                    <option value="" >Choose a type</option>
+                                    <option value="event" >Event</option>
+                                    <option value="expo" >Exposition</option>
+                                    <option value="workshop" >Workshop</option>
+                            </select>
+                            <button class="btn btn6" type="submit" name="formSearchType" value="type" >Filter</button>
+                        </form>
+                        
+                        <form method="GET" action="{{ path('app_schedule') }}">
+                            <label for="status">Choose a status:</label>
+                            <select id="status" name="status">
+                                    <option value="" >Choose a status</option>
+                                    <option value="open" >OPEN</option>
+                                    <option value="closed" >CLOSED</option>
+                                    <option value="pending" >PENDING</option>
+                            </select>
+                            <button class="btn btn6" type="submit" name="formSearchStatus" value="status" >Filter</button>
+                        </form>
+                        
+                        <form method="GET" action="{{ path('app_schedule') }}">
+                            <label for="period">Choose a period:</label>
+                            <select id="period" name="period">
+                                    <option value="" >Choose a period</option>
+                                    <option value="week" > 1 week</option>
+                                    <option value="days" > 30 days</option>
+                                    <option value="months" >3 months</option>
+                            </select>
+                            <button class="btn btn6" type="submit" name="formSearchPeriod" value="period" >Filter</button>
+                        </form>
+            
+                    </div>
+            
+                    <form method="GET" action="{{ path('app_schedule') }}">
+                        <button class="btn btn6" type="submit" name="formResetType" value="reset">Reset</button>
+                    </form >
+                </div>
+        
+                <div class="results-search-schedule">
+
+                    {% if results is not empty %}
+                         <h4 class="text-n2">Result of the search<span>_</span> </h4>
+                            {% for result in results %}
+                            <div class="event-container-schedule">
+                                {% if result.type is defined %}
+                                    {% if result.type == 'EXPO' %}
+                                        {% for photo in result.photos %}
+                                        <figure>
+                                            <img src="{{ asset('img/activity/expo/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                                        </figure>
+                                        {% endfor %}
+                                    {% elseif result.type == 'EVENT' %}
+                                        {% for photo in result.photos %}
+                                        <figure>
+                                            <img src="{{ asset('img/activity/event/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                                        </figure>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endif %}
+                                <div class="content">
+                                {% if result.type is defined %}
+                                    {% if result.type == 'EXPO' %}
+                                        <p class="type">Exposition</p>
+                                        <a href="{{ path('show_exposition', { slug: result.slug }) }}">
+                                             <h2 class="text-n2">{{ result.name }}</h2>
+                                        </a>
+                                    {% elseif result.type == 'EVENT' %}
+                                        <p class="type">Event</p>
+                                        <a href="{{ path('show_event', { slug: result.slug }) }}">
+                                            <h2 class="text-n2">{{ result.name }}</h2>
+                                       </a>
+                                    {% endif %}
+                                {% endif %}
+                                <p>{{result.startDate}}  <span>|</span> {{result.endDate}}  - {{ result.status }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                       
+                    {% elseif noResultsFound %}
+                        {# <p>No result found</p> #}
+                    {% endif %}
+
+
+                    {% if resultsByKeywords is not empty %}
+                    <h4 class="text-n2">Result of the search</h4>
+                       {% for result in resultsByKeywords %}
+                       <div class="event-container-schedule">
+
+                        {% if result.type is defined %}
+                            {% if result.type == 'EXPO' %}
+                                {% for photo in result.photos %}
+                                <figure>
+                                    <img src="{{ asset('img/activity/expo/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                                </figure>
+                                {% endfor %}
+                            {% elseif result.type == 'EVENT' %}
+                                {% for photo in result.photos %}
+                                <figure>
+                                    <img src="{{ asset('img/activity/event/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                                </figure>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+
+                           <div class="content">
+                           {% if result.type is defined %}
+                               {% if result.type == 'EXPO' %}
+                                   <p class="type">Exposition</p>
+                                   <a href="{{ path('show_exposition', { slug: result.slug }) }}">
+                                        <h2 class="text-n2">{{ result.name }}</h2>
+                                   </a>
+                               {% elseif result.type == 'EVENT' %}
+                                   <p class="type">Event</p>
+                                   <a href="{{ path('show_event', { slug: result.slug }) }}">
+                                       <h2 class="text-n2">{{ result.name }}<</h2>
+                                  </a>
+                               {% endif %}
+                           {% endif %}
+                           <p>{{result.startDate}}  <span>|</span> {{result.endDate}}  - {{ result.status }}</p>
+                           </div>
+                       </div>
+                       {% endfor %}
+                  
+               {% elseif noResultsFound %}
+                   {# <p>No result found</p> #}
+               {% endif %}
+
+
+               {% if resultsByStatus is not empty %}
+               <h4 class="text-n2">Result of the search<span>_</span> </h4>
+                  {% for result in resultsByStatus %}
+                  <div class="event-container-schedule">
+                    {% if result.type is defined %}
+                        {% if result.type == 'EXPO' %}
+                            {% for photo in result.photo %}
+                            <figure>
+                                <img src="{{ asset('img/activity/expo/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                            </figure>
+                            {% endfor %}
+                        {% elseif result.type == 'EVENT' %}
+                            {% for photo in result.photos %}
+                            <figure>
+                                <img src="{{ asset('img/activity/event/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                            </figure>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                      <div class="content">
+                      {% if result.type is defined %}
+                          {% if result.type == 'EXPO' %}
+                              <p class="type">Exposition</p>
+                              <a href="{{ path('show_exposition', { slug: result.slug }) }}">
+                                   <h2 class="text-n2">{{ result.name }}<span>_</span></h2>
+                              </a>
+                          {% elseif result.type == 'EVENT' %}
+                              <p class="type">Event</p>
+                              <a href="{{ path('show_event', { slug: result.slug }) }}">
+                                  <h2 class="text-n2">{{ result.name }}<span>_</span></h2>
+                             </a>
+                          {% endif %}
+                      {% endif %}
+                      <p>{{result.startDate}}  <span>|</span> {{result.endDate}}  - {{ result.status }}</p>
+                      </div>
+                  </div>
+                  {% endfor %}
+             
+                {% elseif noResultsFound %}
+                    {# <p>No result found</p> #}
+                {% endif %}
+  
+                {% if resultsByPeriod is not empty %}
+                <h4 class="text-n2">Result of the search<span>_</span> </h4>
+                   {% for result in resultsByPeriod %}
+                   <div class="event-container-schedule">
+                    {% if result.type is defined %}
+                        {% if result.type == 'EXPO' %}
+                            {% for photo in result.photos %}
+                            <figure>
+                                <img src="{{ asset('img/activity/expo/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                            </figure>
+                            {% endfor %}
+                        {% elseif result.type == 'EVENT' %}
+                            {% for photo in result.photos %}
+                            <figure>
+                                <img src="{{ asset('img/activity/event/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                            </figure>
+                            {% endfor %}
+                        {% endif %}
+                        {% else %}
+                        {% for photo in result.photos %}
+                            <figure>
+                                <img src="{{ asset('img/activity/workshop/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                            </figure>
+                        {% endfor %}
+                    {% endif %}
+                       <div class="content">
+                       {% if result.type is defined %}
+                           {% if result.type == 'EXPO' %}
+                               <p class="type">Exposition</p>
+                               <a href="{{ path('show_exposition', { slug: result.slug }) }}">
+                                    <h2 class="text-n2">{{ result.name }}<span>_</span></h2>
+                               </a>
+                           {% elseif result.type == 'EVENT' %}
+                               <p class="type">Event</p>
+                               <a href="{{ path('show_event', { slug: result.slug }) }}">
+                                   <h2 class="text-n2">{{ result.name }}<span>_</span></h2>
+                              </a>
+                           {% endif %}
+                       {% endif %}
+                       <p>{{result.startDate}}  <span>|</span> {{result.endDate}}  - {{ result.status }}</p>
+                       </div>
+                   </div>
+                   {% endfor %}
+              
+                 {% elseif noResultsFound %}
+                     {# <p>No result found</p> #}
+                 {% endif %}
+                
+                </div>   
+            </div>
+        </div>
+    </div> 
+</section>
 {% endblock %}

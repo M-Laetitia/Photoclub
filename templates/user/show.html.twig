@@ -1,0 +1,448 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your account - PHOTOCLUB{% endblock %}
+{% block meta %}Access your registration details, event history, and subscription information on PHOTOCLUB. Stay updated with your engagements and past experiences.{% endblock %}
+{% block index %}noindex{% endblock %}
+
+{% block body %}
+
+    <div class="banner">
+        <div class="content">
+            <h1 class="banner-title">YOUR PROFIL >></h1>
+            <br>
+            <div class="subtitle">
+                <p class="banner-text">Manage your datas</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <section class="content" id="profil-user">
+
+        <div id="content-profil-user">
+            <div id="separator-profil"></div>
+            <div id="top">
+                <div id="pattern"></div>
+                <h2 class="text-n1">{{ user }} </h2>
+                <div id="avatar">
+
+                    <div>
+                        <picture>
+                            {% if user.avatar %}
+                            <img src="{{ asset('img/avatars/' ~ user.avatar) }}" alt="user's avatar">
+                            {% else %}
+                                <img src="{{ asset('img/visuals/user-profile-icon.webp') }}" alt="avatar without picture">
+                            {% endif %}
+                        </picture>
+                    </div>
+
+                    <div>
+                        {#<i id="upload-avatar-btn" class="fa-regular fa-pen-to-square fa-lg"></i> #}
+                        <i id="upload-avatar-btn" class="ri-image-edit-line"></i>
+                    </div>
+                </div>
+
+                {# <p>Role: {{ user.getSimpleRoles|join(', ')}} </p> #}
+                {% set roles = user.getSimpleRoles %}
+                {% set hasArtistRole = 'photographer' in user.getSimpleRoles %}
+
+                <div id="roles">
+                   {% if roles is not empty %}
+                    {# loop for  admin   #}
+                    {% for role in roles %}
+                        {% if role != 'photographer' %}
+                            <div>
+                                {% if role == 'admin' %}
+                                    <a href="{{ path('app_dashboard')}}"><i class="fa-solid fa-user-tie fa-xl"></i></a>
+                                {% endif %}
+                                
+                                
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    {# loop for artist role #}
+                    {% if hasArtistRole %}
+                        <div id="role-artist">
+                            <a href="{{ path('manage_profil', {slug: app.user.slug }) }}"><i class="fa-solid fa-palette fa-xl"></i></a>
+                            
+                        </div>
+                    {% else %}
+                        <div id="not-artist">
+                            <i class="fa-solid fa-palette fa-xl"></i>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                </div>
+
+            </div>
+
+            <div id="upload-avatar">
+                <div id="form-avatar">
+                    {{ form_start(form) }}
+                    {{ form_errors(form)}}
+                    {{ form_row(form.avatar) }} 
+                    <div class="btn btn6">
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="middle">
+                <div id="left">
+                    <p class="text-n2" id="infos">Info</p>
+                    <div class="text-n3" id="info">
+                        <p><span>Username :</span> {{user}}</p>
+                        <p><span>Email :</span> {{ user.email }}</p>
+                        <p><span>Registration date :</span> {{ user.registrationDate|date("d.m.Y") }}</p>
+                        <p><span>Member since :</span> {{ user.durationSinceRegistration}}</p>
+                    </div>
+
+                    <div id="actions" class="logo-profile">
+                        <div>
+                            <i id="edit-infos-btn" class="fa-regular fa-pen-to-square"></i>
+                            <p>Edit informations</p>
+                        </div>
+                        <div>
+                            <a href=" {{ path('editPassword_user',{'id': app.user.id }) }}"><i class="fa-solid fa-unlock-keyhole"></i></a>
+                            <a href=" {{ path('editPassword_user',{'id': app.user.id }) }}"><p>Change password</p></a>
+                            
+                        </div>
+                        <div>
+                            <i id="delete-account-btn" class="fa-solid fa-x"></i>
+                            <p>Delete account</p>
+                        </div>
+                        <div>
+                            <a href=" {{ path('app_logout') }}"><i id="logout-btn" class="fa-solid fa-right-from-bracket"></i></a>
+                            <p>Logout</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="right">
+                    <p class="text-n2" id="activities">Activity</p>
+                    <div class="text-n3" id="activity">
+                        <div class="activity-list">
+                            <i class="fa-regular fa-eye"></i>
+                            <p class="toggle-btn" data-target=".events">Events</p>
+                        </div>
+
+                        <div class="activity-list">
+                            <i class="fa-regular fa-eye"></i>
+                            <p class="toggle-btn" data-target=".expos">Expositions</p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div id="bottom">
+                <div id="content">
+                    <div id="edit-form">
+                        {{ form_start(formEditUser) }}
+                        <div class="field">{{ form_row(formEditUser.username) }}</div>
+                        <div class="field"> {{ form_row(formEditUser.email) }}</div>
+                        <div class="field">{{ form_row(formEditUser.Validate) }}</div>
+                        {{ form_end(formEditUser) }}
+                    </div>
+
+                    <div id="delete-account">
+                        <p>Are you sure you want to delete your account? This action can't be undone.</p>
+                        <div>
+                            <div class="confirm">
+                                <a href=" {{ path('delete_user', {'id': app.user.id }) }}"><i class=" icon-confirm fa-regular fa-circle-check"></i>
+                                <p>Confirm</p></a>
+
+                            </div>
+                            <div class="cancel">
+                                <a href="#"><i class=" icon-cancel fa-regular fa-circle-xmark"></i>
+                                    <p>Cancel</p></a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="activity-recap">
+                        {# EVENTS ----------------- #}
+                        <div class="recap events" style="display: none;">
+                            {% if user.areaParticipations is empty %}
+                                <p class="text-n2">No any events else<span>...</span></p>
+                            {% else %}
+
+                                <p class="text-n2">Ongoing and future Events<span>_</span></p>
+                                
+                                    {% set counter = 1 %}
+                                    {% for participation in user.areaParticipations %}
+                                        {% if participation.area.type == "EVENT" %}
+                                            {% set has_event_participation = true %}
+                                            {% if participation.area.status in ["OPEN", "CLOSED", "PENDING"]  %}
+                                            <div>
+                                                <p>0{{ counter }}.</p>
+                                                <p>
+                                                    {{ participation.area.name }} <span>|</span> {{ participation.area.startDate|formatDate }}  - {{ participation.area.startDate|date('H:i') }} 
+                                                </p>
+                                                
+                                                <div class="see-more" >
+                                                    <a href="{{ path('show_event', { slug : participation.area.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
+                                                </div>
+                                                
+                                            </div>
+                                                {% set counter = counter + 1 %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+
+
+                                <p class="text-n2" style="margin-top: 1.2rem;">Archived Events<span>_</span></p>
+                                
+                                    {% set counter2 = 1 %}
+                                    {% for participation in user.areaParticipations %}
+                                        {% if participation.area.type == "EVENT" %}
+                                            {% set has_event_participation = true %}
+                                            {% if participation.area.status == "ARCHIVED"  %}
+                                            <div>
+                                                <p>0{{ counter }}.</p>
+                                                <p>{{ participation.area.name }} <span>|</span> {{ participation.area.startDate|formatDate }}  - {{ participation.area.startDate|date('H:i') }} </p>
+
+                                                <div class="see-more" >
+                                                    <a href="{{ path('show_event', { slug : participation.area.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
+                                                </div>
+
+                                            </div>
+                                                {% set counter2 = counter2 + 1 %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                            {% endif %}
+
+                            <p class="close-btn" data-target=".events"><i class="fa-regular fa-solid fa-x fa-sm"></i></p>
+                        </div>
+
+
+                        {# EXPO ----------------- #}
+                        <div class="recap expos" style="display: none;">
+                            {% if user.areaParticipations is empty %}
+                                <p class="text-n2">No any expositions else<span>...</span></p>
+                            {% else %}
+
+                                <p class="text-n2">Ongoing and future Expositions<span>...</span></p>
+                                
+                                    {% set counter = 1 %}
+                                    {% for participation in user.areaParticipations %}
+                                        {% if participation.area.type == "EXPO" %}
+                                            {% set has_event_participation = true %}
+                                            {% if participation.area.status in ["OPEN", "CLOSED", "PENDING"]  %}
+                                            <div>
+                                                <p>0{{ counter }}.</p>
+                                                <p>{{ participation.area.name }} <span>|</span> {{ participation.area.startDate|formatDate }}  - {{ participation.area.startDate|date('H:i') }} . {{ participation.area.endDate|formatDate }}  - {{ participation.area.endDate|date('H:i') }}</p>
+
+                                                <div class="see-more" >
+                                                    <a href="{{ path('show_exposition', { slug : participation.area.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
+                                                </div>
+
+                                            </div>
+                                                {% set counter = counter + 1 %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+
+
+                                <p class="text-n2" style="margin-top: 1.2rem;">Archived Expositions<span>_</span></p>
+                                
+                                    {% set counter2 = 1 %}
+                                    {% for participation in user.areaParticipations %}
+                                        {% if participation.area.type == "EXPO" %}
+                                            {% set has_event_participation = true %}
+                                            {% if participation.area.status == "ARCHIVED"  %}
+                                            <div>
+                                                <p>0{{ counter }}.</p>
+                                                <p>{{ participation.area.name }} <span>|</span> {{ participation.area.startDate|formatDate }}  - {{ participation.area.startDate|date('H:i') }} . {{ participation.area.endDate|formatDate }}  - {{ participation.area.endDate|date('H:i') }}</p>
+
+                                                <div class="see-more" >
+                                                    <a href="{{ path('show_exposition', { slug : participation.area.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
+                                                </div>
+
+                                            </div>
+                                                {% set counter2 = counter2 + 1 %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                            {% endif %}
+                            <p class="close-btn" data-target=".expos"><i class="fa-regular fa-solid fa-x fa-sm"></i></p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src= "{{ asset('js/gsap.min.js') }}"></script>
+
+    <script>
+        gsap.to("#pattern", {
+            // Background position destination
+            // Animation duration
+            // Easing function (linear for uniform motion)
+            // Repeat indefinitely
+            /*backgroundPosition: "-10000px 0", 
+            duration: 100, 
+            ease: "linear", 
+            repeat: -1 */
+        });
+
+        gsap.from("#pattern", {
+            opacity: 0,
+            duration: 4,
+            ease: "easeInOut", 
+            delay: 1.6
+        });
+
+
+        gsap.from("#profil-user", {
+            opacity: 0, 
+            duration: 1.2, 
+            ease: "easeInOut", 
+            delay: 0.8
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('#edit-form input');
+           
+            inputs.forEach(function(input) {
+                input.addEventListener('focus', function() {
+                    this.style.borderColor = '#207E93'; 
+                    this.previousElementSibling.style.color = '#207E93'; 
+                });
+                //blur event is triggered when the input field loses focus
+                input.addEventListener('blur', function() {
+                    this.style.borderColor = '#939393'; 
+                    this.previousElementSibling.style.color = ''; 
+                });
+            });
+        });
+
+        $(document).ready(function() {
+
+            // upload avatar picture
+            $('#upload-avatar-btn').click(function(){
+                $("#form-avatar").slideToggle();
+            });
+
+            // show / hide edit account div
+            $('#edit-infos-btn').click(function(){
+                $("#edit-form").slideToggle();
+            });
+            // show / hide delete account div
+            $('#delete-account-btn').click(function(){
+                $("#delete-account").slideToggle();
+            });
+            // hide delete account on cancel
+            $('.cancel').click(function() {
+                event.preventDefault(); 
+                $('#delete-account').slideToggle();
+            });
+            // change logo on hovering (confirm)
+            $('.confirm').hover(
+                function() {
+                    $('.icon-confirm').removeClass('fa-regular').addClass('fa-solid');
+                },
+                function() {
+                    $(this).find('.icon-confirm').removeClass('fa-solid').addClass('fa-regular');
+                }
+            );
+            // change logo on hovering (cancel)
+            $('.cancel').hover(
+                function() {
+                    $('.icon-cancel').removeClass('fa-regular').addClass('fa-solid');
+                },
+                function() {
+                    $(this).find('.icon-cancel').removeClass('fa-solid').addClass('fa-regular');
+                }
+            );
+
+            // change logo on hovering (cancel)
+            $('.see-more a').hover(function() {
+                $(this).find('i').removeClass('ri-eye-close-line').addClass('ri-eye-fill');
+            }, function() {
+                $(this).find('i').removeClass('ri-eye-fill').addClass('ri-eye-close-line');
+            });
+
+
+
+            // show / hide eye icon on activities hover
+            $('.activity-list p').hover(function() {
+                $(this).prev('i').css('opacity', '1');
+            }, function() {
+                $(this).prev('i').css('opacity', '0');
+            });
+
+
+            // show / hide eye activities recap
+            $('.toggle-btn').click(function(event) {
+                event.preventDefault(); 
+                var target = $(this).data('target');
+                $(target).slideToggle();
+
+            // Once the content is open, move the window to the top of this content
+            var offset = $('#logout-btn').offset().top;
+            $('html, body').animate({
+                scrollTop: offset
+            }, 'slow');
+            });
+
+            // show / hide subscription recap
+            $('.history-btn').click(function(event) {
+                event.preventDefault(); 
+                $('#subscription-recap').slideToggle();
+
+            // Once the content is open, move the window to the top of this content
+            var offset = $('#logout-btn').offset().top;
+            $('html, body').animate({
+                scrollTop: offset
+            }, 'slow');
+            });
+
+            
+            // close history recap and scroll up
+            $('.close-history-btn').click(function(event) {
+                event.preventDefault(); 
+                $('#subscription-recap').slideToggle();
+
+                // Once the content is closed, move the window to the top of the page
+                var offset = $('picture').offset().top;
+                $('html, body').animate({
+                    scrollTop: offset
+                }, 'slow');
+            });
+
+
+
+            // close activities recap and scroll up
+            $('.close-btn').click(function(event) {
+                event.preventDefault(); 
+                var target = $(this).data('target');
+                $(target).slideToggle();
+
+                // Once the content is closed, move the window to the top of the page
+                var offset = $('picture').offset().top;
+                $('html, body').animate({
+                    scrollTop: offset
+                }, 'slow');
+            });
+            
+        })
+ 
+    </script>
+
+{% endblock %}

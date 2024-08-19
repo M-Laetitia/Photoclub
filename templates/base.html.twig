@@ -48,6 +48,8 @@
     </head>
 
     <body>
+
+
       <header>
 
         <a href="index.php?action=accueil">
@@ -59,26 +61,29 @@
                 
               </figcaption>
             </figure>
-          </a>
+        </a>
 
         {#   --NAVBAR-- */#}
         <nav>
          
-            <div id="close-button">
-                <i class="fa-solid fa-x"></i>
-            </div> 
+
+
 
             <ul>  
                 <li class="link"><a href="{{ path('app_photographer') }}">GALLERY</a></li>
                 <li class="link"><a href="{{ path('app_event') }}">EVENTS</a></li>
                 <li class="link"><a href="{{ path('app_schedule') }}">SCHEDULE</a></li>
-                {# <li class="link"><a href="{{ path('app_contact')}}">CONTACT</a></li> */#} 
+                <li class="link"><a href="{{ path('app_contact')}}">CONTACT</a></li>
+            
+            <div id="close-button">
+                    <i class="fa-solid fa-x"></i>
+            </div> 
               
             
 
             <div id="user-interface">
                 {% if app.user %}
-                    <div class="dropdown">
+                {#    <div class="dropdown">
                         <span><i class="ri-user-4-fill"></i></span>
                         <div class="dropdown-content">
                             <p><a href="{{ path('show_user', {slug: app.user.slug }) }}">PROFIL</a></p>
@@ -92,7 +97,7 @@
                             <p><a href=" {{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</a></p>
                         </div>
                     </div>
-                {% else %}
+                {% else %} */#}
                 <div class="dropdown">
                     <span ><i class="ri-login-circle-line"  ></i></span>
                     <div class="dropdown-content">
@@ -107,12 +112,7 @@
  
             <div id="toggle-menu">
                 <i class="fa-solid fa-bars"></i>
-            </div>            
-                        
-      
-              
-
-            
+            </div>                              
 
             <div class="nav-menu">
                 
@@ -131,7 +131,8 @@
         <aside id="aboutUs">
             <div>
                 <h3>PHOTOCLUB</h3>
-                <p>There is the club of professional photographers, students and simply amateurs showing their artworks, tooking part in events, publishing their photos and inspiring one other.</p>
+
+                <p>This is the club of professional photographers, students and simply amateurs taking part in events, publishing their photos and inspiring one other.</p>
                 <div class='button btn4'>************************</div>
                 {# <div class="socials">
                     <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
@@ -153,7 +154,8 @@
             {% endif %}
             
             {% if app.user %}
-            <a href="{{ path('app_subscription')}}"><i class="ri-bard-fill"></i></a>
+            {# <a href="{{ path('app_subscription')}}"><i class="ri-bard-fill"></i></a> #}
+            <a href="{{ path('app_home') }}"><i class="fa-solid fa-palette"></i></a>
             {% endif %}
          
         </div>
