@@ -86,10 +86,10 @@
                     <div class="dropdown">
                         <span><i class="ri-user-4-fill"></i></span>
                         <div class="dropdown-content">
-                            <p><a href="{{ path('show_user', {slug: app.user.slug }) }}">PROFIL</a></p>
+                            <p><a href="{{ path('show_user', {slug: app.user.email }) }}">PROFIL</a></p>
 
                             {% if is_granted('ROLE_PHOTOGRAPHER') %}
-                            <p><a href="{{ path('manage_profil', {slug: app.user.slug }) }}">USER PAGE</a></p>
+                            <p><a href="{{ path('manage_profil', {slug: app.user.email }) }}">USER PAGE</a></p>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
                             <p><a href="{{ path('app_dashboard')}}">DASHBOARD</a></p>

@@ -44,7 +44,7 @@
 
                 {# <p>Role: {{ user.getSimpleRoles|join(', ')}} </p> #}
                 {% set roles = user.getSimpleRoles %}
-                {% set hasArtistRole = 'photographer' in user.getSimpleRoles %}
+                {% set hasPhotographerRole = 'photographer' in user.getSimpleRoles %}
 
                 <div id="roles">
                    {% if roles is not empty %}
@@ -61,14 +61,14 @@
                         {% endif %}
                     {% endfor %}
 
-                    {# loop for artist role #}
-                    {% if hasArtistRole %}
-                        <div id="role-artist">
+                    {# loop for photographer role #}
+                    {% if hasPhotographerRole %}
+                        <div id="role-photographer">
                             <a href="{{ path('manage_profil', {slug: app.user.slug }) }}"><i class="fa-solid fa-palette fa-xl"></i></a>
                             
                         </div>
                     {% else %}
-                        <div id="not-artist">
+                        <div id="not-photographer">
                             <i class="fa-solid fa-palette fa-xl"></i>
                         </div>
                     {% endif %}
@@ -167,27 +167,27 @@
                     </div>
 
                     <div id="activity-recap">
-                        {# EVENTS ----------------- #}
+                        {# EVENTS #}
                         <div class="recap events" style="display: none;">
-                            {% if user.areaParticipations is empty %}
+                            {% if user.eventParticipations is empty %}
                                 <p class="text-n2">No any events else<span>...</span></p>
                             {% else %}
 
                                 <p class="text-n2">Ongoing and future Events<span>_</span></p>
                                 
                                     {% set counter = 1 %}
-                                    {% for participation in user.areaParticipations %}
-                                        {% if participation.area.type == "EVENT" %}
+                                    {% for participation in user.eventParticipations %}
+                                        {% if participation.event.type == "EVENT" %}
                                             {% set has_event_participation = true %}
-                                            {% if participation.area.status in ["OPEN", "CLOSED", "PENDING"]  %}
+                                            {% if participation.event.status in ["OPEN", "CLOSED", "PENDING"]  %}
                                             <div>
                                                 <p>0{{ counter }}.</p>
                                                 <p>
-                                                    {{ participation.area.name }} <span>|</span> {{ participation.area.startDate|formatDate }}  - {{ participation.area.startDate|date('H:i') }} 
+                                                    {{ participation.event.name }} <span>|</span> {{ participation.event.startDate|formatDate }}  - {{ participation.event.startDate|date('H:i') }} 
                                                 </p>
                                                 
                                                 <div class="see-more" >
-                                                    <a href="{{ path('show_event', { slug : participation.area.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
+                                                    <a href="{{ path('show_event', { slug : participation.event.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
                                                 </div>
                                                 
                                             </div>
@@ -200,16 +200,16 @@
                                 <p class="text-n2" style="margin-top: 1.2rem;">Archived Events<span>_</span></p>
                                 
                                     {% set counter2 = 1 %}
-                                    {% for participation in user.areaParticipations %}
-                                        {% if participation.area.type == "EVENT" %}
+                                    {% for participation in user.eventParticipations %}
+                                        {% if participation.event.type == "EVENT" %}
                                             {% set has_event_participation = true %}
-                                            {% if participation.area.status == "ARCHIVED"  %}
+                                            {% if participation.event.status == "ARCHIVED"  %}
                                             <div>
                                                 <p>0{{ counter }}.</p>
-                                                <p>{{ participation.area.name }} <span>|</span> {{ participation.area.startDate|formatDate }}  - {{ participation.area.startDate|date('H:i') }} </p>
+                                                <p>{{ participation.event.name }} <span>|</span> {{ participation.event.startDate|formatDate }}  - {{ participation.event.startDate|date('H:i') }} </p>
 
                                                 <div class="see-more" >
-                                                    <a href="{{ path('show_event', { slug : participation.area.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
+                                                    <a href="{{ path('show_event', { slug : participation.event.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
                                                 </div>
 
                                             </div>
@@ -225,23 +225,23 @@
 
                         {# EXPO ----------------- #}
                         <div class="recap expos" style="display: none;">
-                            {% if user.areaParticipations is empty %}
+                            {% if user.eventParticipations is empty %}
                                 <p class="text-n2">No any expositions else<span>...</span></p>
                             {% else %}
 
                                 <p class="text-n2">Ongoing and future Expositions<span>...</span></p>
                                 
                                     {% set counter = 1 %}
-                                    {% for participation in user.areaParticipations %}
-                                        {% if participation.area.type == "EXPO" %}
+                                    {% for participation in user.eventParticipations %}
+                                        {% if participation.event.type == "EXPO" %}
                                             {% set has_event_participation = true %}
-                                            {% if participation.area.status in ["OPEN", "CLOSED", "PENDING"]  %}
+                                            {% if participation.event.status in ["OPEN", "CLOSED", "PENDING"]  %}
                                             <div>
                                                 <p>0{{ counter }}.</p>
-                                                <p>{{ participation.area.name }} <span>|</span> {{ participation.area.startDate|formatDate }}  - {{ participation.area.startDate|date('H:i') }} . {{ participation.area.endDate|formatDate }}  - {{ participation.area.endDate|date('H:i') }}</p>
+                                                <p>{{ participation.event.name }} <span>|</span> {{ participation.event.startDate|formatDate }}  - {{ participation.event.startDate|date('H:i') }} . {{ participation.event.endDate|formatDate }}  - {{ participation.event.endDate|date('H:i') }}</p>
 
                                                 <div class="see-more" >
-                                                    <a href="{{ path('show_exposition', { slug : participation.area.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
+                                                    <a href="{{ path('show_exposition', { slug : participation.event.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
                                                 </div>
 
                                             </div>
@@ -254,16 +254,16 @@
                                 <p class="text-n2" style="margin-top: 1.2rem;">Archived Expositions<span>_</span></p>
                                 
                                     {% set counter2 = 1 %}
-                                    {% for participation in user.areaParticipations %}
-                                        {% if participation.area.type == "EXPO" %}
+                                    {% for participation in user.eventParticipations %}
+                                        {% if participation.event.type == "EXPO" %}
                                             {% set has_event_participation = true %}
-                                            {% if participation.area.status == "ARCHIVED"  %}
+                                            {% if participation.event.status == "ARCHIVED"  %}
                                             <div>
                                                 <p>0{{ counter }}.</p>
-                                                <p>{{ participation.area.name }} <span>|</span> {{ participation.area.startDate|formatDate }}  - {{ participation.area.startDate|date('H:i') }} . {{ participation.area.endDate|formatDate }}  - {{ participation.area.endDate|date('H:i') }}</p>
+                                                <p>{{ participation.event.name }} <span>|</span> {{ participation.event.startDate|formatDate }}  - {{ participation.event.startDate|date('H:i') }} . {{ participation.event.endDate|formatDate }}  - {{ participation.event.endDate|date('H:i') }}</p>
 
                                                 <div class="see-more" >
-                                                    <a href="{{ path('show_exposition', { slug : participation.area.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
+                                                    <a href="{{ path('show_exposition', { slug : participation.event.slug  }) }}">See more <i class="ri-eye-close-line"></i></a>
                                                 </div>
 
                                             </div>
