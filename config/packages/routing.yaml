@@ -10,3 +10,8 @@ when@prod:
     framework:
         router:
             strict_requirements: null
+            # The production environment may require the default_uri to be defined here 
+            #to prevent the URI in emails to point to localhost:
+             
+            # ...
+            #default_uri: '<your project's root URI>'

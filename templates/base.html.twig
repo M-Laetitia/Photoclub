@@ -52,7 +52,7 @@
 
       <header>
 
-        <a href="index.php?action=accueil">
+        {#<a href="index.php?action=accueil">
             <figure id="logo-container">
                 <img src="{{ asset('img/logo.png') }}" alt="logo1">
               <figcaption>
@@ -83,7 +83,7 @@
 
             <div id="user-interface">
                 {% if app.user %}
-                {#    <div class="dropdown">
+                    <div class="dropdown">
                         <span><i class="ri-user-4-fill"></i></span>
                         <div class="dropdown-content">
                             <p><a href="{{ path('show_user', {slug: app.user.slug }) }}">PROFIL</a></p>
@@ -97,7 +97,7 @@
                             <p><a href=" {{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</a></p>
                         </div>
                     </div>
-                {% else %} */#}
+                {% else %} 
                 <div class="dropdown">
                     <span ><i class="ri-login-circle-line"  ></i></span>
                     <div class="dropdown-content">
