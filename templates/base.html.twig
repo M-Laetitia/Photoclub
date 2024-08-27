@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Welcome to Photoclub!{% endblock %}</title>
         <meta name="description" content="{% block meta %}Description!{% endblock %}">
         <meta name="robots" content="{% block index %}index, follow{% endblock %}">
 
@@ -15,14 +15,18 @@
         {# Remixicon #}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.6.0/remixicon.css" integrity="sha512-GL7EM8Lf8kU23I3kTio2kRWt8YRDVIQcSZjRVtVRfk05kB/QvkyafuTC94Ev0X6qk7Z0r5s06c1lsP1p/ezDYw==" crossorigin="anonymous" referrerpolicy="no-referrer">
         
+        {# Favicon #}
+        <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon"/>
+
         {# Font Google #}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link
         href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=M+PLUS+1+Code:wght@100..700&display=swap"
         rel="stylesheet">
-    
-      <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
+        {#href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" 
+        rel="stylesheet"> #}
+        <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
         
         {% block stylesheets %}
         <link rel="stylesheet" href="{{asset('css/styles.css')}}">
@@ -41,6 +45,7 @@
 
         {% block javascripts %}
         <script src= "{{ asset('js/main.js') }}"></script>
+        <script src= "{{ asset('js/scrollreveal.min.js') }}"></script>
         <script src= "{{ asset('js/gsap.min.js') }}"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         
@@ -49,40 +54,38 @@
 
     <body>
 
+    {#################################### ----HEADER---- ###################################################################}
 
-      <header>
+      <header class="header" id="header">
 
-        {#<a href="index.php?action=accueil">
-            <figure id="logo-container">
-                <img src="{{ asset('img/logo.png') }}" alt="logo1">
-              <figcaption>
-                class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}">
-                    <a href="{{ path('app_home') }}">Photoclub</a>
-                
-              </figcaption>
-            </figure>
-        </a>
+    {###########   ----NAV BAR---- ############}  
+        <nav class="nav container">
+        {#<a href="index.php?action=accueil">/#}
+            <a href="#" class="nav__logo">    
+              {#<span class="nav__logo-circle"><img src="{{ asset('img/logo.png') }}" alt="logo1"></span>#}
+              {#<class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}"> #}
+              {#<span class="nav__logo-name"></span><a href="{{ path('app_home') }}">Photoclub</a></span>#}
+              <span class="nav__logo-circle"><i class="ri-camera-3-line"></i></span>
+              <span class="nav__logo-name"></span>Photoclub</span>
+            </a>
 
-        {#   --NAVBAR-- */#}
-        <nav>
-         
+       
+            <div class="nav__menu" id="nav-menu">
+              <span class="nav__title">Menu</span>
+              <h3 class="nav__name">PHOTOCLUB</h3>
 
 
+              <ul class="nav__list">  
+                <li class="nav__item"><a href="{{ path('app_home') }}" class="nav__link">HOME</a></li>
+                <li class="nav__item"><a href="{{ path('app_photographer') }}" class="nav__link">GALLERY</a></li>
+                <li class="nav__item"><a href="{{ path('app_event') }}" class="nav__link">EVENTS</a></li>
+                <li class="nav__item"><a href="{{ path('app_schedule') }}" class="nav__link">SCHEDULE</a></li>
+                <li class="nav__item"><a href="{{ path('app_contact')}}" class="nav__link">CONTACT US</a></li>
+        
 
-            <ul>  
-                <li class="link"><a href="{{ path('app_photographer') }}">GALLERY</a></li>
-                <li class="link"><a href="{{ path('app_event') }}">EVENTS</a></li>
-                <li class="link"><a href="{{ path('app_schedule') }}">SCHEDULE</a></li>
-                <li class="link"><a href="{{ path('app_contact')}}">CONTACT</a></li>
-            
-            <div id="close-button">
-                    <i class="fa-solid fa-x"></i>
-            </div> 
-              
-            
 
-            <div id="user-interface">
-                {% if app.user %}
+                <div id="user-interface">
+                  {% if app.user %}
                     <div class="dropdown">
                         <span><i class="ri-user-4-fill"></i></span>
                         <div class="dropdown-content">
@@ -97,30 +100,34 @@
                             <p><a href=" {{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</a></p>
                         </div>
                     </div>
-                {% else %} 
-                <div class="dropdown">
-                    <span ><i class="ri-login-circle-line"  ></i></span>
-                    <div class="dropdown-content">
-                        <p><a href="{{ path('app_login') }}">LOG ON</a></p>
-                        <p><a href="{{ path('app_register') }}">REGISTER</a></p>
+                  {% else %} 
+                    <div class="dropdown">
+                    
+                        <div class="dropdown-content">
+                            <p><a href="{{ path('app_login') }}">LOG ON</a></p>
+                            <p><a href="{{ path('app_register') }}">REGISTER</a></p>
+                        </div>
                     </div>
+                  {% endif %}
                 </div>
-                {% endif %}
+
+              </ul>
+ 
+              <!-- Close button -->
+              <div class="nav__close" id="nav-close">
+                <i class="ri-close-line"></i>
+              </div>
+
             </div>
 
-            </ul>
- 
-            <div id="toggle-menu">
-                <i class="fa-solid fa-bars"></i>
-            </div>                              
+            <div class="nav__buttons">
+               <!-- Theme Button -->
+               <i class="ri-moon-line change-theme" id="theme-button"></i>
 
-            <div class="nav-menu">
-                
-                <a href="#">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </a>
+               <!-- Toggle button -->
+               <div class="nav__toggle" id="nav-toggle">
+               <i class="ri-menu-4-line"></i>
+               </div>
             </div>
         </nav>
 
@@ -174,12 +181,12 @@
             </div>
             {% endfor %} 
     
- 
+        {#########   --MAIN-- #########}
             
-        <div class="main">
+        <main class="main">
             {% block body %}
             {% endblock %}
-        </div>
+        </main>
 
         <div id="back-top-btn"></div>
       
@@ -239,15 +246,27 @@
 
     {#/*  --SCRIPT-- */#}
 
-    {# MenuBurger #}
-        <script src="{{ asset('js/menuBurger.js') }}"></script>
+    {# SCROLL UP #}
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-s-line"></i>
+      </a>
+  
+    {# SCROLLREVEAL #}
+    <script src="{{ asset('js/scrollreveal.min.js') }}"></script>  
+    
+    {# MAIN JS #}
+    <script src="{{ asset('js/main.js') }}"></script>
+  
+    {# EMAIL JS #}
+      <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
 
-    {# MenuBurger #}
+    {# CAROSEL #}
     <script src="{{ asset('js/carousel.js') }}"></script>        
 
     {# Jquery #}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+
     <script src="{{ asset('js/gwl.js') }}"></script>
 
     {# FullCalendar #}
@@ -259,168 +278,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
     
-    <script>
-        $(document).ready(function() {
-
-            // switch pattern footer depending on the body color
-            var bodyBgColor = $('body').css('background-color');
-    
-            if (bodyBgColor.includes("21")) { 
-                $('#top-footer').css('background-image', "url('/images/visuals/film-strip-on.webp')");
-            } else if (bodyBgColor.includes("249")) { 
-                $('#top-footer').css('background-image', "url('/images/visuals/film-strip.webp')");
-            }
-
-
-            // add a color on links in the navbar
-            var currentUrl = window.location.href;
-            $('nav p a').each(function() {
-                var href = $(this).attr('href');
-                if (currentUrl.includes(href)) {
-                    $(this).addClass("highlight");
-                }
-            });
-            
-            
-            // show menu burger + animation for the links in the hamburger menus
-            $('#burger-icon').click(function() {
-                $('#mobile-header').toggleClass('nav-active');
-            
-                // Select all links within '.nav-links'
-                $('#mobile-header .nav-links a').each(function(index) {
-                    var link = $(this);
-            
-                    // Reset the color of the links when hiding them
-                    if ($('#mobile-header').hasClass('nav-active')) {
-                        setTimeout(function() {
-                            link.css('color', '#F9F9F9'); 
-                        }, 200 + index * 100); // Start after 200ms, then increase by 200ms for each link
-                    } else {
-                        link.css('color', '#151515'); // Reset the color of the link
-                    }
-                });
-            })
-
-            
-        });
-
-        setTimeout(function() {
-            gsap.to(".name-app", {
-                keyframes: [
-                    { backgroundPosition: "100% 0%", ease: "none", duration: 0 }, 
-                    { backgroundPosition: "0% 0%", ease: "none", duration: 0.5 }, 
-                    { backgroundPosition: "100% 0%", ease: "none", duration: 1 } 
-                ],
-                repeat: -1, // infinite repeat
-                repeatDelay: 8 // seconds between repetition
-            });
-        }, 2000);
-
-
-        if(document.querySelector('.breadcrumb')) {
-            gsap.from(".breadcrumb", {
-                opacity: 0, 
-                duration: 1.2, 
-                ease: "easeInOut", 
-                delay: 1.2
-            });
-
-        }
-
-        // animation background footer on scroll
-        document.addEventListener("DOMContentLoaded", function() {
-            gsap.set("#top-footer", {opacity: 0}); 
-            gsap.set("#image", {opacity: 0}); 
-            const footerAnimation = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#top-footer",
-                start: "top 60%",
-                end: "bottom 40%",
-                //markers: true
-            }
-            });
-    
-            footerAnimation.to("#top-footer", {
-            opacity: 1,
-            ease: "power4.out",
-            delay: 0.3,
-            onComplete: function() {
-                gsap.to("#image-footer img", {
-                opacity: 1,
-                ease: "power4.out",
-                delay: 0.1,
-                });
-            }
-            });
-        });
-            
-        // aside modale
-        $(document).ready(function() {
-            var isClicked = false;
-        
-            $('.nav-menu a').click(function() {
-                if (!isClicked) {
-                    // 1° fois que l'élément est cliqué
-                    $('.nav-menu a div').css('background-color', '#FFFFFF');
-                    $('.nav-menu a div:nth-child(1)').css('transform', 'translateY(0.55rem) rotate(-45deg)');
-                    $('.nav-menu a div:nth-child(2)').css('transform', 'rotate(45deg)');
-                    $('.nav-menu a div:nth-child(3)').css('transform', 'translateY(-0.5rem) rotate(-45deg)');
-                    $('aside').css('right', '0');
-                } else {
-                    // Deuxième fois que l'élément est cliqué (réinitialiser)
-                    $('.nav-menu a div').css('background-color', '');
-                    $('.nav-menu a div').css('transform', '');
-                    $('aside').css('right', '-28rem');
-                }
-        
-                // Inverser l'état de la variable isClicked
-                isClicked = !isClicked;
-            });
-
-            // date (footer)
-            var currentYear = new Date().getFullYear();
-            $('#footer-date').text(currentYear);
-    
-        
-        });
-
-        // back-to-top button
-        var btn = $('#back-top-btn');
-        // When the user scrolls the page
-        $(window).scroll(function() {
-        // If the scroll position is greater than 300 pixels
-        if ($(window).scrollTop() > 300) { 
-            btn.addClass('show'); // Show the button
-        } else {
-            btn.removeClass('show'); // hide the button
-        }
-        });
-        // When the button is clicked
-        btn.on('click', function(e) {
-        // Prevent the default click behavior
-        e.preventDefault();
-        // Animation to scroll the page to the top (300ms)
-        $('html, body').animate({scrollTop:0}, '300');
-        });
-                
-
-        // animation text banner 
-         // Ajouter la classe "visible" au titre du header pour déclencher l'animation
-        $('.banner-title').addClass('visible');
-        $('.banner-text').addClass('visible');
-
-
-        if(document.querySelector('.banner')) {
-            gsap.from(".banner", {
-                opacity: 0,
-                duration: 2,
-                ease: "easeInOut", 
-                delay: 0.6
-            });
-        }
-        
-    
-    </script>
     </body>
 
 </html>
