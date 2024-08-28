@@ -8,18 +8,24 @@
     {% endfor %}
 
     <h1>Register</h1>
-
+    <br>
     {{ form_errors(registrationForm) }}
-
+    <br>
     {{ form_start(registrationForm) }}
+    <br>
         {{ form_row(registrationForm.email) }}
+    <br>    
         {# on ajoute la ligne pour le champ "pseudo" #}
         {{ form_row(registrationForm.pseudo) }}
+    <br>    
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
+    <br>    
         {{ form_row(registrationForm.agreeTerms) }}
-
+    <br>
         <button type="submit" class="btn">Register</button>
+    <br>   
+    <br> 
     {{ form_end(registrationForm) }}
 {% endblock %}

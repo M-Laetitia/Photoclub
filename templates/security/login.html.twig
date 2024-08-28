@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sign in!{% endblock %}
+{% block title %}Sign in{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -14,10 +14,15 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
+    <br>
+    <br>
     <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
+    <br>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus> 
+    <br>
+    <label for="inputPassword">Password</label> 
+    <br>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
@@ -26,10 +31,14 @@
 
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
-    </button>
+    </button> 
+    <br>
+    <br>
 
     <button class="btn btn-lg btn-primary" type="submit">
         <a href="{{ path('app_forgot_password_request') }}">I forgot my password</a>
     </button>
+    <br>
+    <br>
 </form>
 {% endblock %}

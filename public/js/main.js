@@ -1,5 +1,5 @@
 // SHOW MENU //
-const navMenu = document.getElementById("nav-menu"),
+// const navMenu = document.getElementById("nav-menu"),
   navToggle = document.getElementById("nav-toggle"),
   navClose = document.getElementById("nav-close");
 
@@ -39,41 +39,41 @@ const shadowHeader = () => {
 window.addEventListener("scroll", shadowHeader);
 
 // EMAIL JS //
-const contactForm = document.getElementById("contact-form"),
-  contactMessage = document.getElementById("contact-message");
+// const contactForm = document.getElementById("contact-form"),
+//   contactMessage = document.getElementById("contact-message");
 
-const sendEmail = (e) => {
-  e.preventDefault();
+// const sendEmail = (e) => {
+//   e.preventDefault();
 
-  // serviceID - templateID - #form - publicKey
-  emailjs
-    .sendForm(
-      "service_0y0zjpm",
-      "template_xu2xhxf",
-      "#contact-form",
-      "mQ_Hy1lTJEY5DPSW6"
-    )
-    .then(
-      () => {
-        // show sent message
-        contactMessage.textContent = "Message sent successfully ✅";
+//   // serviceID - templateID - #form - publicKey
+//   emailjs
+//     .sendForm(
+//       "service_0y0zjpm",
+//       "template_xu2xhxf",
+//       "#contact-form",
+//       "mQ_Hy1lTJEY5DPSW6"
+//     )
+//     .then(
+//       () => {
+//         // show sent message
+//         contactMessage.textContent = "Message sent successfully ✅";
 
-        // Remove message after five seconds
-        setTimeout(() => {
-          contactMessage.textContent = "";
-        }, 5000);
+//         // Remove message after five seconds
+//         setTimeout(() => {
+//           contactMessage.textContent = "";
+//         }, 5000);
 
-        // clear input fields
-        contactForm.reset();
-      },
-      () => {
-        // show error message
-        contactMessage.textContent = "Message not sent (service error) ❌";
-      }
-    );
-};
+//         // clear input fields
+//         contactForm.reset();
+//       },
+//       () => {
+//         // show error message
+//         contactMessage.textContent = "Message not sent (service error) ❌";
+//       }
+//     );
+// };
 
-contactForm.addEventListener("submit", sendEmail);
+// contactForm.addEventListener("submit", sendEmail);
 
 // SHOW SCROLL UP //
 const scrollUp = () => {
