@@ -17,11 +17,137 @@
     </div>
 </div>
 
-<style>
+{# <style>
     body {background-color: #375f75;}
-</style>
+</style> #}
 
-<section class="content register-user" id="contact-page">
+<section class="contact__section" id="contact">
+    <div class="contact__container grid">
+
+      <div class="contact__data">
+        <h2 class="section__title-2">
+          <span>Contact Photoclub</span>
+        </h2>
+        <p class="contact__description-1">
+          Send us your message and we'll get
+          back to you.
+        </p>
+
+        <p class="contact__description-2">
+          We need your <b>Name and Surname</b> and <b>Email Address</b> and we garantee
+          to use your email address  for replying only.
+        </p>
+
+        <div class="geometric-box"></div>
+      </div>
+
+      <div class="contact__mail">
+        <h2 class="contact__title">Send us an email</h2>
+
+        <form action="" class="contact__form" id="contact-form" method="POST">
+          <div class="contact__group">
+            <div class="contact__box">
+              <input
+                type="text"
+                name="user_name"
+                class="contact__input"
+                id="name"
+                required
+                placeholder="Name and Surname"
+              />
+              <label for="name" class="contact__label">Name and Surname</label>
+            </div>
+
+            <div class="contact__box">
+              <input
+                type="email"
+                name="user_email"
+                class="contact__input"
+                id="email"
+                required
+                placeholder="Email Address"
+              />
+              <label for="email" class="contact__label"
+                >Email Address</label
+              >
+            </div>
+          </div>
+
+          <div class="contact__box">
+            <input
+              type="text"
+              name="user_subject"
+              class="contact__input"
+              id="subject"
+              required
+              placeholder="Subject"
+            />
+            <label for="subject" class="contact__label">Subject</label>
+          </div>
+
+          <div class="contact__box contact__area">
+            <textarea
+              name="user_message"
+              id="message"
+              class="contact__input"
+              required
+              placeholder="Message"
+            ></textarea>
+            <label for="message" class="contact__label">Message</label>
+          </div>
+
+          <p class="contact__message" id="contact-message"></p>
+
+          <button type="submit" class="contact__button button">
+            <i class="ri-send-plane-line"></i> Send Message
+          </button>
+        </form>
+      </div>
+
+      <div class="contact__social">
+        <img
+          src="assets/img/curved-arrow.svg"
+          alt=""
+          class="contact__social-arrow"
+        />
+        <div class="contact__social-data">
+          <div>
+            <p class="contact__social-description-1">
+              If you don't want to send emails >>>
+            </p>
+            <p class="contact__social-description-2">
+              Write us on my social networks
+            </p>
+          </div>
+          <div class="contact__social-links">
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              class="contact__social-link"
+            >
+              <i class="ri-facebook-circle-line"></i>
+            </a>
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              class="contact__social-link"
+            >
+              <i class="ri-instagram-line"></i>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              class="contact__social-link"
+            >
+              <i class="ri-linkedin-box-line"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+{# <section class="content register-user" id="contact-page">
     <div id="register-container">
         <div id="separator"></div>
 
@@ -75,6 +201,6 @@
         </div>
 
     </div>
-</section>
+</section> #}
      
 {% endblock %}

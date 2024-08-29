@@ -7,7 +7,7 @@
   /* Colors */
 
   /* color mode HSL (hue, saturation, Lightness */
-  --first-color: hsl(14, 98%, 50%);
+  --first-color: hsl(207, 98%, 50%);
   --black-color: hsl(0, 0%, 0%);
   --black-color-light: hsl(0, 0%, 40%);
   --white-color: hsl(0, 0%, 95%);
@@ -110,7 +110,7 @@ img {
 
 /* variables dark theme */
 body.dark-theme {
-  --first-color: hsl(14, 80%, 50%);
+  --first-color: hsl(189, 80%, 50%);
   --black-color: hsl(0, 0%, 18%);
   --black-color-light: hsl(0, 0%, 30%);
   --title-color: hsl(0, 0%, 95%);
@@ -126,7 +126,7 @@ body.dark-theme {
 
 .dark-theme .section__title-1::after,
 .dark-theme .section__title-2::after {
-  background-color: hsla(14, 70%, 50%, 0.2);
+  background-color: hsla(300, 70%, 50%, 0.2);
 }
 
 .dark-theme :is(.home__arrow, .home__line, .about__line) {
@@ -136,7 +136,7 @@ body.dark-theme {
 .dark-theme .home__description b {
   background: linear-gradient(
     90deg,
-    hsla(14, 80%, 50%, 0.3),
+    hsla(293, 80%, 50%, 0.3),
     hsla(14, 80%, 50%, 0)
   );
 }
@@ -201,7 +201,7 @@ body.dark-theme {
   content: "";
   width: 40px;
   height: 28px;
-  background-color: hsla(14, 98%, 50%, 0.2);
+  background-color: hsla(293, 55%, 36%, 0.2);
   position: absolute;
   top: -4px;
   right: -8px;
@@ -216,6 +216,7 @@ body.dark-theme {
   position: absolute;
   width: 20px;
   height: 20px;
+  border-radius: 50%;
   background-color: var(--first-color);
   rotate: -30deg;
 }
@@ -225,6 +226,7 @@ body.dark-theme {
   position: absolute;
   width: 16px;
   height: 16px;
+  border-radius: 50%;
   border: 3px solid var(--black-color);
   left: -5px;
   top: -5px;
@@ -273,6 +275,10 @@ body.dark-theme {
 
 .nav__logo-circle {
   border-radius: 50%;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: var(--first-color);
 }
 
 .nav__toggle {
@@ -490,7 +496,7 @@ body.dark-theme {
 .home__description b {
   background: linear-gradient(
     90deg,
-    hsla(14, 98%, 50%, 0.3),
+    hsla(290, 98%, 50%, 0.3),
     hsla(14, 98%, 50%, 0)
   );
 }

@@ -42,29 +42,26 @@
         {# <link rel="stylesheet" href="{{asset('css/managePages.css')}}"> #}
         {% endblock %}
 
-        {% block javascripts %}
-        <script src= "{{ asset('js/main.js') }}"></script>
-        <script src= "{{ asset('js/scrollreveal.min.js') }}"></script>
-        <script src= "{{ asset('js/gsap.min.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        
-        {% endblock %}
+
     </head>
 
     <body>
 
-    {#################################### ----HEADER---- ###################################################################}
+    {################### ----HEADER---- ############################################}
+
+
 
       <header class="header" id="header">
 
     {###########   ----NAV BAR---- ############}  
+
         <nav class="nav container">
         {#<a href="index.php?action=accueil">/#}
             <a href="#" class="nav__logo">    
               {#<span class="nav__logo-circle"><img src="{{ asset('img/logo.png') }}" alt="logo1"></span>#}
               {#<class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}"> #}
               {#<span class="nav__logo-name"></span><a href="{{ path('app_home') }}">Photoclub</a></span>#}
-              <span class="nav__logo-circle"><i class="ri-camera-3-line"></i></span>
+              <span class="nav__logo-circle"><i class="ri-camera-3-line"></i></span></div>
               <span class="nav__logo-name"></span>Photoclub</span>
             </a>
 
@@ -180,7 +177,7 @@
             </div>
             {% endfor %} 
     
-        {#########   --MAIN-- #########}
+        {############# --MAIN-- ###########################}
             
         <main class="main">
             {% block body %}
@@ -190,7 +187,7 @@
         <div id="back-top-btn"></div>
       
 
-        {#   --FOOTER-- */#}
+        {############# --FOOTER-- #########################}
 
         <footer class="footer">
             <div class="footer__container container grid">
@@ -239,32 +236,18 @@
             
         </footer>
 
-
-    {#/*  --SCRIPT-- */#}
-
     {# SCROLL UP #}
     <a href="#" class="scrollup" id="scroll-up">
         <i class="ri-arrow-up-s-line"></i>
       </a>
-  
-    {# SCROLLREVEAL #}
-    <script src="{{ asset('js/scrollreveal.min.js') }}"></script>  
 
     
-    {# MAIN JS #}
-    <script src="{{ asset('js/main.js') }}"></script>
-  
-    {# EMAIL JS #}
-      <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    {################################ --SCRIPT-- #############################################################}  
   
 
     {# CAROSEL #}
     <script src="{{ asset('js/carousel.js') }}"></script>        
-
-    {# Jquery #}
-    {# <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
-    <script src="{{ asset('js/gwl.js') }}"></script> #}
 
     {# Schedule #}
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
@@ -274,6 +257,19 @@
     {# Gsap #}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src= "{{ asset('js/gsap.min.js') }}"></script>
+
+    {% block javascripts %}
+    {# MAIN JS #}    
+    <script src= "{{ asset('js/main.js') }}"></script>
+    {# SCROLLREVEAL #}
+    <script src= "{{ asset('js/scrollreveal.min.js') }}"></script>
+    {# EMAIL JS #}
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    {# Jquery #}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    {# <script src="{{ asset('js/gwl.js') }}"></script> #}
+    {% endblock %}
     
     </body>
 

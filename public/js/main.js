@@ -1,11 +1,12 @@
 // SHOW MENU //
-// const navMenu = document.getElementById("nav-menu"),
+ const navMenu = document.getElementById("nav-menu"),
   navToggle = document.getElementById("nav-toggle"),
   navClose = document.getElementById("nav-close");
-
+  console.log("click");
 // MENU SHOW //
 // Validate if constant exists //
 if (navToggle) {
+ 
   navToggle.addEventListener("click", () => {
     navMenu.classList.add("show-menu");
   });
@@ -22,7 +23,7 @@ if (navClose) {
 // REMOVE MENU MOBILE //
 const navLink = document.querySelectorAll(".nav__link");
 const linkAction = () => {
-  const navMenu = document.getElementById("nav-menu");
+   //navMenu = document.getElementById("nav-menu");
   // when we click on each nav__link, we remove the show-menu class //
   navMenu.classList.remove("show-menu");
 };
