@@ -32,10 +32,10 @@ class Event
     private ?string $quote = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $start_date = null;
+    private ?\DateTimeInterface $startDate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $end_time = null;
+    private ?\DateTimeInterface $endTime = null;
 
     #[ORM\Column]
     private ?int $nb_rooms = null;
@@ -141,27 +141,41 @@ class Event
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $start_date): static
+    public function setStartDate(\DateTimeInterface $startDate): static
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
 
         return $this;
     }
+
+     //It transforms the type of the StartDate'format 
+    public function getFormattedStartDate(): ?string
+    {
+        return $this->startDate ? $this->startDate->format('d.m.Y') : null;
+    }
+
 
     public function getEndTime(): ?\DateTimeInterface
     {
-        return $this->end_time;
+        return $this->endTime;
     }
 
-    public function setEndTime(\DateTimeInterface $end_time): static
+    public function setEndTime(\DateTimeInterface $endTime): static
     {
-        $this->end_time = $end_time;
+        $this->endTime = $endTime;
 
         return $this;
     }
+
+    //It transform the type of the EndTime'format 
+    public function getFormattedEndTime(): ?string
+    {
+        return $this->endTime ? $this->endTime->format('d.m.Y') : null;
+    }
+
 
     public function getNbRooms(): ?int
     {

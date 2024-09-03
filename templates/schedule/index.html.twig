@@ -12,7 +12,8 @@
         <h1 class="banner-title">OUR SCHEDULE >></h1>
         <div class="subtitle">
             <p class="banner-text">For better planning of your business and cultural life</p>
-           
+            <br>
+            <br>
         </div>
     </div>
 </div>
@@ -43,7 +44,6 @@
                                     <option value="" >Choose a type</option>
                                     <option value="event" >Event</option>
                                     <option value="expo" >Exposition</option>
-                                    <option value="workshop" >Workshop</option>
                             </select>
                             <button class="btn btn6" type="submit" name="formSearchType" value="type" >Filter</button>
                         </form>
@@ -63,7 +63,7 @@
                             <label for="period">Choose a period:</label>
                             <select id="period" name="period">
                                     <option value="" >Choose a period</option>
-                                    <option value="week" > 1 week</option>
+                                    <option value="week" > 7 days</option>
                                     <option value="days" > 30 days</option>
                                     <option value="months" >3 months</option>
                             </select>
@@ -112,7 +112,7 @@
                                        </a>
                                     {% endif %}
                                 {% endif %}
-                                <p>{{result.startDate}}  <span>|</span> {{result.endDate}}  - {{ result.status }}</p>
+                                <p>{{result.startDate|format('d.m.Y')}}  <span>|</span> {{result.endTime|format('d.m.Y')}}  - {{ result.status }}</p>
                                 </div>
                             </div>
                             {% endfor %}
@@ -157,23 +157,23 @@
                                   </a>
                                {% endif %}
                            {% endif %}
-                           <p>{{result.startDate}}  <span>|</span> {{result.endDate}}  - {{ result.status }}</p>
+                           <p>{{result.startDate|format('d.m.Y')}}  <span>|</span> {{result.endTime|format('d.m.Y')}}  - {{ result.status }}</p>
                            </div>
                        </div>
                        {% endfor %}
                   
                {% elseif noResultsFound %}
-                   {# <p>No result found</p> #}
+                    <p>No results found</p>
                {% endif %}
 
 
                {% if resultsByStatus is not empty %}
-               <h4 class="text-n2">Result of the search<span>_</span> </h4>
+               <h4 class="text-n2">Result of the search</h4>
                   {% for result in resultsByStatus %}
                   <div class="event-container-schedule">
                     {% if result.type is defined %}
                         {% if result.type == 'EXPO' %}
-                            {% for photo in result.photo %}
+                            {% for photo in result.photos %}
                             <figure>
                                 <img src="{{ asset('img/activity/expo/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
                             </figure>
@@ -191,16 +191,16 @@
                           {% if result.type == 'EXPO' %}
                               <p class="type">Exposition</p>
                               <a href="{{ path('show_exposition', { slug: result.slug }) }}">
-                                   <h2 class="text-n2">{{ result.name }}<span>_</span></h2>
+                                   <h2 class="text-n2">{{ result.name }}</h2>
                               </a>
                           {% elseif result.type == 'EVENT' %}
                               <p class="type">Event</p>
                               <a href="{{ path('show_event', { slug: result.slug }) }}">
-                                  <h2 class="text-n2">{{ result.name }}<span>_</span></h2>
+                                  <h2 class="text-n2">{{ result.name }}</h2>
                              </a>
                           {% endif %}
                       {% endif %}
-                      <p>{{result.startDate}}  <span>|</span> {{result.endDate}}  - {{ result.status }}</p>
+                      <p>{{result.startDate|format('d.m.Y')}}  <span>|</span> {{result.endTime|format('d.m.Y')}}  - {{ result.status }}</p>
                       </div>
                   </div>
                   {% endfor %}
@@ -210,7 +210,7 @@
                 {% endif %}
   
                 {% if resultsByPeriod is not empty %}
-                <h4 class="text-n2">Result of the search<span>_</span> </h4>
+                <h4 class="text-n2">Result of the search</h4>
                    {% for result in resultsByPeriod %}
                    <div class="event-container-schedule">
                     {% if result.type is defined %}
@@ -227,34 +227,28 @@
                             </figure>
                             {% endfor %}
                         {% endif %}
-                        {% else %}
-                        {% for photo in result.photos %}
-                            <figure>
-                                <img src="{{ asset('img/activity/workshop/' ~ result.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
-                            </figure>
-                        {% endfor %}
                     {% endif %}
                        <div class="content">
                        {% if result.type is defined %}
                            {% if result.type == 'EXPO' %}
                                <p class="type">Exposition</p>
                                <a href="{{ path('show_exposition', { slug: result.slug }) }}">
-                                    <h2 class="text-n2">{{ result.name }}<span>_</span></h2>
+                                    <h2 class="text-n2">{{ result.name }}</h2>
                                </a>
                            {% elseif result.type == 'EVENT' %}
                                <p class="type">Event</p>
                                <a href="{{ path('show_event', { slug: result.slug }) }}">
-                                   <h2 class="text-n2">{{ result.name }}<span>_</span></h2>
+                                   <h2 class="text-n2">{{ result.name }}</h2>
                               </a>
                            {% endif %}
                        {% endif %}
-                       <p>{{result.startDate}}  <span>|</span> {{result.endDate}}  - {{ result.status }}</p>
+                       <p>{{result.startDate|format('d.m.Y')}}  <span>|</span> {{result.endTime|format('d.m.Y')}}  - {{ result.status }}</p>
                        </div>
                    </div>
                    {% endfor %}
               
                  {% elseif noResultsFound %}
-                     {# <p>No result found</p> #}
+                     {# <p>No results found</p> #}
                  {% endif %}
                 
                 </div>   

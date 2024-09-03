@@ -45,7 +45,7 @@ class ScheduleController extends AbstractController
                 'title' => $event->getName(),
                 'type' => $event->getType(),
                 'start' => $event->getStartDate()->format('Y-m-d H:i:s'),
-                'end' => $event->getEndDate()->format('Y-m-d H:i:s'),
+                'end' => $event->getEndTime()->format('Y-m-d H:i:s'),
                 'slug' => $event->getSlug(),
             ];
         }
@@ -66,7 +66,7 @@ class ScheduleController extends AbstractController
                 'title' => $expo->getName(),
                 'type' => $expo->getType(),
                 'start' => $expo->getStartDate()->format('Y-m-d H:i:s'),
-                'end' => $expo->getEndDate()->format('Y-m-d H:i:s'),
+                'end' => $expo->getEndTime()->format('Y-m-d H:i:s'),
                 'slug' => $expo->getSlug(),
             ];
         }
@@ -340,7 +340,7 @@ class ScheduleController extends AbstractController
             } elseif ($expoId !== null) {
                 $filePath = 'img/photographers/' . $expoId . '/works/'  . $fileName;
             } else {
-                // si associé à rien
+                // si associé à null
                 $filePath = '';
             }
 
