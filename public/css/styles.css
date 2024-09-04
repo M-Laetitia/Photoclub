@@ -1106,6 +1106,8 @@ body.dark-theme {
 /* FOOTER */
 .footer {
   background-color: var(--black-color);
+  position: relative;
+  opacity: 0.7;
 }
 
 .footer__container {
@@ -1137,6 +1139,19 @@ body.dark-theme {
 .footer__copy a {
   color: var(--white-color);
   font-weight: var(--font-medium);
+}
+
+.footer__image {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.footer__image img {
+  width: 100%;
 }
 
 /* SCROLL BAR */

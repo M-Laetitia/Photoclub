@@ -75,7 +75,7 @@ class EventRepository extends ServiceEntityRepository
     }
 
 
-    // ^ search event (keyword)
+    // >> search event (keyword)
     public function searchByKeyword(string $keyword) {  // Takes a keyword parameter of type string.
         $qb = $this->createQueryBuilder('e')
         ->where('e.name LIKE :keyword') // The keyword is inserted into the query using a parameter named :keyword.
@@ -88,7 +88,7 @@ class EventRepository extends ServiceEntityRepository
     }
 
 
-        // // ^ search event (keyword)
+        // // >> search event (keyword)
         // // Prend un paramètre keyword de type string.
         // public function searchByKeyword(string $keyword) {  
         //     $qb = $this->createQueryBuilder('e')
@@ -101,7 +101,7 @@ class EventRepository extends ServiceEntityRepository
         // }
   
 
-    // ^ search (period)
+    // >> search (period)
 
     public function searchByPeriod(string $period)
     {
@@ -124,7 +124,7 @@ class EventRepository extends ServiceEntityRepository
             default:
                 throw new \InvalidArgumentException("Invalid period: $period");
         }
-        
+        // 2nd createQueryBuilder !
         $qb = $this->createQueryBuilder('e')
             ->where('e.startDate BETWEEN :startDate AND :endTime')
             ->setParameter('startDate', $now)
@@ -136,7 +136,7 @@ class EventRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    //^ Get all past content ordered by date DESC
+    //>> Get all past content ordered by date DESC
     public function getAllPastContent() {
         $em = $this->getEntityManager();
 
@@ -163,15 +163,18 @@ class EventRepository extends ServiceEntityRepository
         // Merge and sort results
         //$allPastContent = array_merge($eventResults, $workshopResults);
         $allPastContent = $eventResults;
-        usort($allPastContent, function($a, $b) {
-            return $b->getStartDate() <=> $a->getStartDate();
+        // usort($allPastContent, function($a, $b) {
+        //     return $b->getStartDate() <=> $a->getStartDate();
+        // });
+        usort($allPastContent, function($a) {
+             return $b->getStartDate();
         });
     
         return $allPastContent;
     }
 
 
-    //^ Get ongoing event/expo
+    // >> Get ongoing event or expo
     public function getCurrentExpoEvents($type)
     {
         $em = $this->getEntityManager();
@@ -182,7 +185,7 @@ class EventRepository extends ServiceEntityRepository
             'SELECT e FROM App\Entity\Event e
             WHERE e.type = :type
             AND e.startDate <= :currentDate
-            AND e.endTimee >= :currentDate'
+            AND e.endTime >= :currentDate'
             )
         ->setParameter('type', $type)
         ->setParameter('currentDate', $currentDate);

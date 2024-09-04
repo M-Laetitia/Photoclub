@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Art Expositions - Photoclub{% endblock %}
+{% block meta %}See our exhibitions on Photoclub, where photographers show there photoworks. Reserve your spot now for a journey through art and inspiration!{% endblock %}
+
+{% block body %}
+
+
+<div class="banner">
+    <div class="content">
+        <h1 class="banner-title">OUR EXPOSITIONS</h1>
+        <div class="subtitle">
+            <p class="banner-text">Be amazed</p>
+            <div class="underscore-blink"> </div>
+        </div>
+    </div>
+</div>
+
+<div class="breadcrumb breadcrumb-dark">
+    <p><a href="{{ path('app_home') }}">Home </a> > All Expositions </p>
+</div>
+
+<section class="content" id="events-index">
+    {% for expo in ongoingExpos %}
+
+        <div class="container-event">
+            <div id="picture-event">
+                {% for picture in expo.pictures %}
+                <figure>
+                    <a href="{{ path('show_exposition', { slug : expo.slug  }) }}">
+                    <img src="{{ asset('img/activity/expo/' ~ expo.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.alt_description }}"></a>
+                </figure>
+                 {% endfor %}
+
+            </div>
+            <div id="infos-event">
+                <h2 class="text-n1">{{expo.name}}<span class="">_</span></h2>
+                <p id="resume-event">{{expo.description}}</p>
+                <div id="details-event">
+                    <p><span>Date : </span> {{expo.startDate|formatDate}} <span id="pipe-separator">|</span> {{expo.startDate|date('H:i')}} - {{expo.endDate|date('H:i')}}</p> 
+                    <p><span>Statut : </span>
+                    
+                        <span class="status {{ expo.status == 'OPEN' ? 'open' : 
+                        (expo.status == 'CLOSED' ? 'closed' : 
+                        (expo.status == 'PENDING' ? 'pending' : 
+                        (expo.status == 'ARCHIVED' ? 'archived' : 'status-default'))) }}">
+                        {{ expo.status }}
+                        </span>
+
+                    </p>
+                    <p><span>Acces : </span> {{expo.access}}</p>
+                    <p><span>Capacity : </span> {{expo.nbReversationMade}}  /  {{expo.nbRooms}}</p>
+
+                </div>
+                <div id="btn-event">
+                    <div class="button btn6"><a href="{{ path('show_exposition', { slug : expo.slug  }) }}">SEE MORE</a></div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</section>
+
+
+<div id="previous-link">
+    <p class="past-event-btn"><i class="ri-eye-close-fill"></i></p>
+    <div>
+        <p>To see all our previous expositions </p>
+        <a href="{{ path('app_archives')}}">check here <i class="ri-arrow-right-double-fill"></i> </a> 
+    </div>
+</div>
+
+
+
+<script src= "{{ asset('js/gsap.min.js') }}"></script>
+<script src= "{{ asset('js/animPages.js') }}"></script>
+
+{% endblock %}
