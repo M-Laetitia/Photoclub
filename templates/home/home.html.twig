@@ -4,41 +4,179 @@
 {% block meta %}Discover PHOTOCLUB, your site for our events and community{% endblock %}
 
 {% block body %}
-    {# --SLIDES-- #}
 
-    <section id="slides-container">
-        
-      <div id="slides">
-          <div class="slide" id="slide1" style="visibility: hidden;" >
-              <picture class="slide-picture">
-                  <img src="{{asset('/img/visuals/image01.png')}}" alt="image 01 home">
-              </picture>
-  
-              <div class="slide-text">
-                  <h1 class="title-text">Learn <br> the Photography</h1>
-                  <p><strong> >> Improve your knowledge </strong> <br> 
-                     <strong> >> Expand your vision</strong> <br>
-                     <strong> >> Show your photos</strong> <br>
-              </div>
-          </div>
-          
+  <section class="home section" id="home">
+    <div class="home__container container grid">
+      <h1 class="home__name">PHOTOCLUB</h1>
+      <div class="home__perfil">
+        <div class="home__image">
+          <img
+            src="{{asset('/img/general/image01.png')}}" 
+            alt="image 01 home"
+            class="home__img"
+          />
+          <div class="home__shadow"></div>
 
-          <div class="slides-arrow right"></div>
+          <img src="{{asset('img/logo.png') }}"
+            alt=""
+            class="home__line"
+          />
 
-          <div class="slide" id="slide2" style="display:none" >
-              <picture class="slide-picture">
-                  <img src="{{asset('/img/visuals/image03.png')}}" alt="image 03 home">
-              </picture>
-  
-              <div class="slide-text">
-                  <h2 class="title-text">Take place <br> in Events</h2>
-                  <p><strong> >> Communicate with the passionate people</strong></p>
-                  <a href="{{path('app_event') }}"><div class="button btn6">See more</div></a>
-              </div>
+          <div class="geometric-box"></div>
+        </div>
 
-          </div>
-
+        <div class="home__social">
+          <a
+            href="https://instagram.com/"
+            target="_blank"
+            class="home__social-link"
+            ><i class="ri-instagram-line"></i
+          ></a>
+          <a
+            href="https://linkedin.com/"
+            target="_blank"
+            class="home__social-link"
+            ><i class="ri-linkedin-box-line"></i>
+          </a>
+          <a
+            href="https://github.com/"
+            target="_blank"
+            class="home__social-link"
+            ><i class="ri-github-line"></i
+          ></a>
+        </div>
       </div>
+
+      <div class="home__info">
+       
+        <br>
+        <p class="home__description">
+            Live with  <b>Photoclub</b> <br>
+            Show your photos <br> 
+            Improve your knowledge <br>
+            Communicate with the passionate people <br>
+        </p>
+
+        <a href="#about" class="home__scroll">
+          <div class="home__scroll-box">
+            <i class="ri-arrow-down-s-line"></i>
+          </div>
+          <span class="home__scroll-text">Scroll Down</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+        <!-- ABOUT -->
+
+  <section class="about section" id="about">
+            <div class="about__container container grid">
+              <h2 class="section__title-1"><span>About us</span></h2>
+              <div class="about__perfil">
+                <div class="about__image">
+                  <img
+                    src="{{asset('/img/general/about_us.webp')}}"
+                    alt="image"
+                    class="about__img"
+                  />
+                  <div class="about__shadow"></div>
+                  <div class="geometric-box"></div>
+                  <img
+                    src="{{asset('/img/logo.png')}}"
+                    alt=""
+                    class="about__line"
+                  />
+                  <div class="about__box"></div>
+                </div>
+              </div>
+              <div class="about__info">
+                <p class="about__description">
+                  Passionate about <b>photos</b> with
+                  <b>spécial effects or without them</b>, Photoclub is the the comunity of amateurs, professional photographers and curious people liking to show and looking their works and learning the news about the photographie together .
+                </p>
+    
+                <ul class="about__list">
+                  <li class="about__item">
+                    <b>Our activities:</b> Expositions, Discussions, Meetings, Opinion's exchange.
+                  </li>
+                </ul>
+                <div class="geometric-box"></div>
+
+                <div class="about__buttons">
+                  <a href="{{ path('app_contact')}}" class="button">
+                    <i class="ri-send-plane-line"></i> Contact Us
+                  </a>
+
+                  {# <a
+                    href="{{ asset('img/logo.png') }}"
+                    target="_blank"
+                    class="button__ghost"
+                  >
+                  </a> #}
+                </div>
+              </div>
+            </div>
+  </section>
+
+
+  <!-- ARTICLES-->
+
+  <section class="articles section" id="articles">
+            <h2 class="section__title-2">
+            <span>Our articles</span>
+            </h2>
+
+            <div class="articles__container container grid">
+            <article class="articles__card">
+                <div class="articles__border"></div>
+                <div class="articles__content">
+                <div class="articles__icon">
+                    <div class="articles__box"></div>
+                    <i class="ri-layout-4-line"></i>
+                </div>
+                <h2 class="articles__title">Do you know what is Photography ?</h2>
+                <p class="articles__description">
+                    <br>
+                    <em>Photography  </em> <small>  is the art, application, and practice of creating images by recording light, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film. <br>
+                       It is employed in many fields of science, manufacturing (e.g., photolithography), and business, as well as its more direct uses for art, film and video production, recreational purposes, hobby, and mass communication </small></p>
+                <p id="name-categ">From free Wikipedia</p>
+                </p>
+                </div>
+            </article>
+
+            <article class="articles__card">
+                <div class="articles__border"></div>
+
+                <div class="articles__content">
+                <div class="articles__icon">
+                    <div class="articles__box"></div>
+                    <i class="ri-code-box-line"></i>
+                </div>
+                <h2 class="articles__title">Development</h2>
+
+                <p class="articles__description">
+                    Custom web development tailored to your specifications, designed
+                    to provide a flawless user experience.
+                </p>
+                </div>
+            </article>
+            <article class="articles__card">
+                <div class="articles__border"></div>
+
+                <div class="articles__content">
+                <div class="articles__icon">
+                    <div class="articles__box"></div>
+                    <i class="ri-smartphone-line"></i>
+                </div>
+                <h2 class="articles__title">Mobile App</h2>
+
+                <p class="articles__description">
+                    Design and transform website projects into mobile Apps to
+                    provide a seamless user experience.
+                </p>
+                </div>
+            </article>
+            </div>
   </section>
 
 {# --CAROUSEL-- #}
@@ -168,7 +306,7 @@
   <div id="pattern"></div>
 </section>
 
-{# --ARTISTS-- #}  
+{# --Photographers-- #}  
 
 
 <section id="calendar">
@@ -188,7 +326,7 @@
 
   <div id="left">
       <figure>
-          <img src="{{asset('/img/visuals/expo.webp')}}" alt=" expo image">
+          <img src="{{asset('/img/general/expo.webp')}}" alt=" expo image">
       </figure>
   </div>
 
@@ -201,7 +339,7 @@
 
   <div id="left">
       <figure>
-          <img src="{{asset('/img/visuals/schedule.webp')}}" alt=" take part image">
+          <img src="{{asset('/img/general/schedule.webp')}}" alt=" take part image">
       </figure>
   </div>
 
@@ -229,63 +367,6 @@
 
 
   <script>
-
-      $(document).ready(function(){
-          var currentSlide = 0;
-          var totalSlides = $('.slide').length;
-          var slideTransitionDelay = 200; // Delay before starting slide transitions
-          var slideTransitionInterval = 5500; // Interval between slide transitions
-      
-          // Function to animate slide elements
-          function animateSlideElements() {
-              gsap.from('.slide .slide-picture', 1.2, {opacity: 0,  });
-              gsap.from('.slide .slide-text .title-text', 1.2, {opacity: 0, y: 200, delay: 0.3 });
-              gsap.from('.slide .slide-text p', 1.2, {opacity: 0, y: -60, delay: 0.8 });
-              gsap.from('.slide .slide-text ', 1.2, {opacity: 0, x: 0, delay: 0.9 });
-              gsap.from('.slide .btn6', 1, {opacity: 0, x: -80, delay: 1.1, ease:"power4.out" });
-      
-              $('.btn6').on('mouseenter', function() {
-                  gsap.to(this, { backgroundColor: '#151515', color: '#f6f4f4',  borderColor : '#f6f4f4', duration: 0.3 });
-              });
-              $('.btn6').on('mouseleave', function() {
-                  gsap.to(this, { backgroundColor: '#53d5db', color: '#151515', borderColor : '#f6f4f4', duration: 0.3 });
-              });
-          }
-      // Function to transition to the next slide
-      function nextSlide() {
-          // Hide the current slide
-          $('.slide').eq(currentSlide).hide();
-          // Calculate the index of the next slide (cycling back to 0 if reaching the end)
-          currentSlide = (currentSlide + 1) % totalSlides;
-          // Show the next slide
-          $('.slide').eq(currentSlide).show();
-          // Animate slide elements
-          animateSlideElements();
-          // Reset underscore visibility
-          $('.underscore-static').css('visibility', 'hidden');
-          setTimeout(function() {
-              $('.underscore-static').css('visibility', 'visible');
-          }, 3500);
-      }
-  
-      // Hide all slides initially
-
-  
-      // After a delay, show the first slide and start changing slides at intervals
-      setTimeout(function() {
-          // Show the first slide
-          $('.slide').css('visibility', 'visible');
-          // Animate elements of the first slide
-          animateSlideElements();
-          // Set interval to call the nextSlide function
-          setInterval(nextSlide, slideTransitionInterval);
-          // Show underscore after a delay
-          setTimeout(function() {
-              $('.underscore-static').css('visibility', 'visible');
-          }, slideTransitionDelay + 2000);
-      }, slideTransitionDelay);
-
-  });
 
   function isElementInViewport(el) {
       const rect = el.getBoundingClientRect();
