@@ -35,7 +35,7 @@
 
                 {% if photo.type != 'photo' %}
                 <figure>
-                    <img src="{{ asset('img/activity/event/' ~ latestEvent.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                    <img src="{{ asset('img/action/event/' ~ latestEvent.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
                 </figure>
                 {% endif %}
                 {% endfor %}
@@ -44,7 +44,7 @@
                 {% for photo in latestEvent.photos %}
                 {% if photo.type != 'photo' %}
                 <figure>
-                    <img src="{{ asset('img/activity/expo/' ~ latestEvent.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
+                    <img src="{{ asset('img/action/expo/' ~ latestEvent.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
                 </figure>
                 {% endif %}
                 {% endfor %}
@@ -103,10 +103,10 @@
                         var imagePath = '';
                         if (item.type === 'EVENT') {
                             eventType = 'Event';
-                            var imagePath = 'img/activity/archived/banner/event' +  item.id + '.webp';
+                            var imagePath = 'img/action/archived/banner/event' +  item.id + '.webp';
                         } else if (item.type === 'EXPO') {
                             eventType = 'exposition';
-                            var imagePath = 'img/activity/archived/banner/exposition' +  item.id + '.webp';
+                            var imagePath = 'img/action/archived/banner/exposition' +  item.id + '.webp';
                         } 
                         
     

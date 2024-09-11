@@ -167,7 +167,7 @@ class EventRepository extends ServiceEntityRepository
         //     return $b->getStartDate() <=> $a->getStartDate();
         // });
         usort($allPastContent, function($a) {
-             return $b->getStartDate();
+             return $a->getStartDate();
         });
     
         return $allPastContent;

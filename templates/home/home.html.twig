@@ -70,7 +70,7 @@
         <!-- ABOUT -->
 
   <section class="about section" id="about">
-            <div class="about__container container grid">
+        <div class="about__container container grid">
               <h2 class="section__title-1"><span>About us</span></h2>
               <div class="about__perfil">
                 <div class="about__image">
@@ -115,201 +115,285 @@
                   </a> #}
                 </div>
               </div>
-            </div>
+        </div>
   </section>
 
 
   <!-- ARTICLES-->
 
   <section class="articles section" id="articles">
-            <h2 class="section__title-2">
+      <h2 class="section__title-2">
             <span>Our articles</span>
-            </h2>
+      </h2>
 
-            <div class="articles__container container grid">
+      <div class="articles__container container grid">
+
             <article class="articles__card">
                 <div class="articles__border"></div>
                 <div class="articles__content">
-                <div class="articles__icon">
+                  <div class="articles__icon">
                     <div class="articles__box"></div>
-                    <i class="ri-layout-4-line"></i>
-                </div>
-                <h2 class="articles__title">Do you know what is Photography ?</h2>
-                <p class="articles__description">
+                    {# <i class="ri-layout-4-line"></i> #}
+                    <i class="ri-camera-3-line"></i>
+                  </div>
+                  <h2 class="articles__title">Do you know what is Photography ?</h2>
+                  <p class="articles__description">
                     <br>
-                    <em>Photography  </em> <small>  is the art, application, and practice of creating images by recording light, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film. <br>
-                       It is employed in many fields of science, manufacturing (e.g., photolithography), and business, as well as its more direct uses for art, film and video production, recreational purposes, hobby, and mass communication </small></p>
-                <p id="name-categ">From free Wikipedia</p>
-                </p>
-                </div>
-            </article>
-
-            <article class="articles__card">
-                <div class="articles__border"></div>
-
-                <div class="articles__content">
-                <div class="articles__icon">
-                    <div class="articles__box"></div>
-                    <i class="ri-code-box-line"></i>
-                </div>
-                <h2 class="articles__title">Development</h2>
-
-                <p class="articles__description">
-                    Custom web development tailored to your specifications, designed
-                    to provide a flawless user experience.
-                </p>
-                </div>
-            </article>
-            <article class="articles__card">
-                <div class="articles__border"></div>
-
-                <div class="articles__content">
-                <div class="articles__icon">
-                    <div class="articles__box"></div>
-                    <i class="ri-smartphone-line"></i>
-                </div>
-                <h2 class="articles__title">Mobile App</h2>
-
-                <p class="articles__description">
-                    Design and transform website projects into mobile Apps to
-                    provide a seamless user experience.
-                </p>
-                </div>
-            </article>
-            </div>
-  </section>
-
-{# --CAROUSEL-- #}
-
-  <section id="carousel">
-
-      <div id="top">
-          <h4><span class="accent-color"> PHOTOCLUB CAROUSEL >></span>
-          </h4>
-          <p id="quote-text" class="scroll-reveal">Welcome <span class="accent-color">and</span> amuse with us ! 
-          </p>
-      </div>
-
-      <div id="content">
-
-          <div class="image">
-              <figure>
-                  <img src="{{asset('/img/activity/archived/banner/carousel1.webp')}}" alt=" "></a>
-              </figure>
-              <div class="infos">
-                  <div>
-                      <p>01.10.2024 - </p> <br>
-                     
-                  </div>
-                  <h4>PHOTOART</h4>
-                  <span style="color:transparent;">aaaaaaaaaaaaa</span></h4>
-                 {#  <a href="{{ path('show_event', { slug : 'photoart'  }) }}"><button>See more</button></a>  #}
-              </div>
-          </div>
-
-          <div class="image">
-              <figure>
-                  <img src="{{asset('/img/activity/archived/banner/carousel2.webp')}}" alt=" "></a>
-              </figure>
-              <div class="infos">
-                  <div>
-                      <p>25.10.2024</p>
-                    
-                  </div>
-                  <h4>WORKSHOP01
-                  <span style="color:transparent;">aaaaaaaaaaaaa</span></h4>
-               {#    <a href="{{ path('show_workshop', { slug : 'workshop01'  }) }}"><button>See more</button></a> #}
-              </div>
-          </div>
-
-          <div class="image">
-              <figure>
-                  <img src="{{asset('/img/activity/archived/banner/carousel3.webp')}}" alt=" "></a>
-              </figure>
-              <div class="infos">
-                  <div>
-                      <p>15.09.2024</p>
-                    
-                  </div>
-                  <h4>EXPO 01
-                  <span style="color:transparent;">aaaaaaaaaaaaa</span></h4>
-                  {#  <a href="{{ path('show_exposition', { slug : 'expo01'  }) }}"><button>See more</button></a> #}
-              </div>
-          </div>
-      </div>
-  </section>
-
-{# --QUOTE-- #}    
-
-<section id="quote-artist">
-  <div style="display:none;"></div>
-  <div  id="wrapper" class="quote-content">
-
-      <div>
-          <div><i class="ri-heart-line"></i></div>
-
-           <div class="quote">
-              <p  id="name-categ"><b>Do you know what is Photography ? </b></p> <br>
-                  <br>
-                  <p><em>Photography  </em> <small>  is the art, application, and practice of creating images by recording light, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film. <br>
-                     It is employed in many fields of science, manufacturing (e.g., photolithography), and business, as well as its more direct uses for art, film and video production, recreational purposes, hobby, and mass communication </small></p>
-              <p id="name-categ">From free Wikipedia</p>
-          </div>
-
-      </div>
-
-      <div style="display:none;">
-          <div><i class="ri-heart-line"></i></div>
-
-          <div class="quote">
-              <blockquote>
-                  <p id="name-categ"><b>Do you know the relations between the law and Photography ? </b></p>
-                  <br>
-                  <p> <em>Photography</em> <small> is both restricted and protected by the law in many jurisdictions. Protection of photographs is typically achieved through the granting of copyright or moral rights to the photographer. <br>
-                     In the United States, photography is protected as a First Amendment right and anyone is free to photograph anything seen in public spaces as long as it is in plain view. <br>
-                     In the UK, a recent law (Counter-Terrorism Act 2008) increases the power of the police to prevent people, even press photographers, from taking pictures in public places. <br>
-                     In South Africa, any person may photograph any other person, without their permission, in public spaces and the only specific restriction placed on what may not be photographed by government is related to anything classed as national security. <br>
-                     Each country has different laws. </small></p>   
-                  <p id="name-categ">From free Wikipedia </p>
-              </blockquote>
-          </div>
-      </div>
-      
-
-      <div style="display:none;">
-          <div><i class="ri-heart-line"></i></div>
-
-          <div class="quote">
-            <blockquote>
-
-                  <p>"In photography there is a reality so subtle that it becomes more real than reality."</p>
-                  <p id="name-categ">Alfred Stieglitz - american photographer </p>
-                  <br>
-                  <p>"It is an illusion that photos are made with the camera… They are made with the eye, heart, and head."
+                    <b><em>Photography</em></b><small>  is the art, application, and practice of creating images by recording light, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film. <br>
+                       It is employed in many fields of science, manufacturing (e.g., photolithography), and business, as well as its more direct uses for art, film and video production, recreational purposes, hobby, and mass communication </small>
+                       <br>
+                       From free Wikipedia ***
                   </p>
-                  <p id="name-categ">Henri Cartier-Bresson - french photographer</p
+                  <div class="geometric-box"></div>
+                </div>
+            </article>
+
+            <article class="articles__card">
+                <div class="articles__border"></div>
+                <div class="articles__content">
+                  <div class="articles__icon">
+                      <div class="articles__box"></div>
+                      {# <i class="ri-code-box-line"></i> #}
+                      <i class="ri-scales-3-fill"></i>
+                  </div>
+                  <h2 class="articles__title">Do you know the relations between the law and Photography ?</h2>
+
+                  <p class="articles__description">
+                   <b><em>Photography</em></b> <small> is both restricted and protected by the law in many jurisdictions. Protection of photographs is typically achieved through the granting of copyright or moral rights to the photographer. <br>
+                    In the United States, photography is protected as a First Amendment right and anyone is free to photograph anything seen in public spaces as long as it is in plain view. <br>
+                    In the UK, a recent law (Counter-Terrorism Act 2008) increases the power of the police to prevent people, even press photographers, from taking pictures in public places. <br>
+                    In South Africa, any person may photograph any other person, without their permission, in public spaces and the only specific restriction placed on what may not be photographed by government is related to anything classed as national security. <br>
+                    Each country has different laws. </small>  
+                    <br>
+                    <br>
+                    From free Wikipedia ***
+                  </p>
                   <br>
-                  <p>"When words become unclear, I shall focus with photographs."</p>
-                  <p id="name-categ">Ansel Adams - american photographer </p>
+                  <br>
+                  <div class="geometric-box"></div>
+                </div>
+            </article>
 
-            </blockquote>
-          </div>
+            <article class="articles__card">
+              <div class="articles__border"></div>
+              <div class="articles__content">
+                <div class="articles__icon">
+                    <div class="articles__box"></div>
+                    {# <i class="ri-code-box-line"></i> #}
+                    <i class="ri-book-open-fill"></i>
+                </div>
+                <h2 class="articles__title">Wise thoughts</h2>
+
+                <p class="articles__description">
+                  "In photography there is a reality so subtle that it becomes more real than reality."
+                  <br>
+                  <br>
+                  <b>(Alfred Stieglitz - american photographer)</b>
+                  <br>
+                  <br>
+                  <br>
+                  "It is an illusion that photos are made with the camera… They are made with the eye, heart, and head."
+                  <br>
+                  <br>
+                  <b>(Henri Cartier-Bresson - french photographer)</b>
+                  <br>
+                  <br>
+                  <br>
+                  "When words become unclear, I shall focus with photographs."
+                  <br>
+                  <br>
+                  <b>(Ansel Adams - american photographer)</b>
+                  <br>
+                  <br>
+                  <br>
+                  "Photography has no rules, it is not a sport. It is the result which counts, no matter how it is achieved."
+                  <br>
+                  <br>
+                  <b>(Bill Brandt - english photographer)</b>
+                </p>
+                <br>
+                <div class="geometric-box"></div>
+              </div>
+          </article>
+
+          <article class="articles__card">
+            <div class="articles__border"></div>
+            <div class="articles__content">
+              <div class="articles__icon">
+                  <div class="articles__box"></div>
+                  {# <i class="ri-code-box-line"></i> #}
+                  <i class="ri-book-3-fill"></i>
+              </div>
+              <h2 class="articles__title">The best books on photography in 2024</h2>
+
+              <p class="articles__description">
+                1. Read This if You Want to Take Good Photographs. 
+                  <br>
+                  <small><em>The best book on photography for beginners overall</em></small>
+                  <br>
+                  <b>Author: Henry Carroll</b>
+                  <br>
+                  <br>
+                  <br>
+
+
+                2. BetterPhoto Basics
+                <br>
+                <small><em>The friendliest book on photography for beginners</em></small>
+                <br>
+                <b>Author: Jim Miotke</b>
+                <br>
+                <br>
+                <br>
+
+                3. One Face, Fifty Ways
+                <br>
+                <small><em>Inspired ideas book for photography enthusiasts</em></small>
+                <br>
+                <b>Author: Mark Wilkinson and Imogen Dyer</b>
+                <br>
+                <br>
+                <br>
+
+                4. The Landscape Photography Workshop
+                <br>
+                <small><em>The best photography book on composition</em></small>
+                <br>
+                <b>Author: Michael Freeman</b>
+                <br>
+                <br>
+                <br>
+
+                5. The Photographer's Eye Remastered
+                <br>
+                <small><em>The ultimate guide to landscape photography</em></small>
+                <br>
+                <b>Author: Ross Hoddinott and Mark Bauer</b>
+              </p>
+              <br>
+              <div class="geometric-box"></div>
+            </div>
+        </article>
+           
       </div>
-  </div>
+  </section>
 
-  <div id="dots" class="dot-content">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-  </div>
-  
-  <div id="pattern"></div>
-</section>
+{#  NEWEST#}
 
-{# --Photographers-- #}  
+  <section class="projects section" id="projects">
+        <h2 class="section__title-1">
+          <span>Newest  Activities</span>
+        </h2>
+
+        <div class="projects__container container grid">
+
+          <article class="projects__card">
+            <div class="projects__image">
+              <img src="{{asset('/img/action/archived/banner/carousel1.webp')}}" alt=" " class="projects__img"></a>
+                
+              {# <a href="#" class="projects__button button">
+                <i class="ri-arrow-right-up-line"></i>
+              </a> #}
+            </div>
+
+            <div class="geometric-box"></div>
+
+            <div class="projects__content">
+              <h3 class="projects__subtitle">From 01.10.2024</h3>
+              <h2 class="projects__title">PHOTOART</h2>
+              <p class="projects__description">
+                Discover the art of photography due to the exposition of the best modern photographers !
+              </p>
+            </div>
 
 
-<section id="calendar">
+            <div class="projects__buttons">
+              {# <a href="{{ path('show_event', { slug : 'photoart' }) }}"><button>Details</button></a>  #}
+             
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                class="projects__link"
+              >
+                <i class="ri-facebook-circle-line"></i> View
+              </a>
+              
+            </div>
+        
+          </article>
+
+          <article class="projects__card">
+            <div class="projects__image">
+              <img src="{{asset('/img/action/archived/banner/carousel2.webp')}}" alt=" " class="projects__img"></a>
+                
+              {# <a href="#" class="projects__button button">
+                <i class="ri-arrow-right-up-line"></i>
+              </a> #}
+            </div>
+
+            <div class="geometric-box"></div>
+
+            <div class="projects__content">
+              <h3 class="projects__subtitle">From 25.10.2024</h3>
+              <h2 class="projects__title">PHOTOWORKSHOP01</h2>
+              <p class="projects__description">
+                Come, see, admire,choose and buy the photoworks of professional photographers and become happy !
+              </p>
+            </div>
+
+            <div class="projects__buttons">
+                  {#  <a href="{{ path('show_workshop', { slug : 'workshop01' }) }}"><button>Details</button></a> #}
+              </a>
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                class="projects__link"
+              >
+                <i class="ri-facebook-circle-line"></i> View
+              </a>
+              
+            </div>
+          </article>
+
+
+          <article class="projects__card">
+            <div class="projects__image">
+              <img src="{{asset('/img/action/archived/banner/carousel3.webp')}}" alt=" " class="projects__img"></a>
+                
+              {# <a href="#" class="projects__button button">
+                <i class="ri-arrow-right-up-line"></i>
+              </a> #}
+            </div>
+
+            <div class="geometric-box"></div>
+
+            <div class="projects__content">
+              <h3 class="projects__subtitle">From 15.09.2024</h3>
+              <h2 class="projects__title">EXPO 01</h2>
+              <p class="projects__description">
+                Magnificient exposition to visit for everyone. Welcome and amuse with us !
+              </p>
+            </div>
+
+            <div class="projects__buttons">
+              {# <a href="{{ path('show_exposition', { slug : 'expo01' }) }}" class="projects__link"><button>Details</button></a> #}
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                class="projects__link"
+              >
+                <i class="ri-facebook-circle-line"></i> View
+              </a>
+            </div>
+          </article> 
+        </div>
+  </section>
+
+{# --Photographers-- #} 
+ {# ajouter le code  #}
+
+
+<section id="schedule">
 
   <div id="right">
       <div>
@@ -332,10 +416,10 @@
 
 </section>
 
-{# --CALENDAR-- #}  
+{# --Schedule-- #}  
 
 
-<section id="calendar">
+<section id="schedule">
 
   <div id="left">
       <figure>
@@ -358,96 +442,14 @@
 </section>
 
 
-  {# JQUERY ANIMATION #}
+  {# JS ANIMATION #}
   
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="{{ asset('js/main.js') }}"></script>
   <script src="{{ asset('js/scrollreveal.min..js') }}"></script>
-  <script src="{{ asset('js/gwl.js') }}"></script> 
-
-
-  <script>
-
-  function isElementInViewport(el) {
-      const rect = el.getBoundingClientRect();
-      return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
-  }
-
-  function changeColorsOnScroll() {
-      var accentTexts = document.querySelectorAll('.accent-text');
-  
-      // Parcourir tous les éléments avec la classe 'accent-text'
-      accentTexts.forEach(function(accentText, index) {
-          // Vérifier si l'élément est dans la vue de la fenêtre du navigateur
-          if (isElementInViewport(accentText)) {
-              // Changer la couleur du premier élément
-              if (index === 0) {
-                  gsap.to(accentText, { color: '#53d5db',  delay: 0.2 }); // Couleur + durée de l'animation
-              } else {
-                  // Changer la couleur du deuxième élément après un délai
-                  gsap.to(accentText, { color: '#53d5db', delay: 0.5, ease: "ease", duration: 2 });  // couleur +  durée de l'animation et délai
-              }
-          } else {
-              // L'élément n'est pas dans la vue, rétablir sa couleur par défaut
-              accentText.style.color = ''; 
-          }
-      });
-  }
-  window.addEventListener('scroll', changeColorsOnScroll);
-
-      const quoteText = document.getElementById('quote-text');
-      
-
-      function revealText(element) {
-          $('#quote-text').css('visibility', 'visible');
-          quoteText.innerHTML = quoteText.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-          const letters = quoteText.querySelectorAll('.letter');
-          // Animate each letter of the text
-          gsap.from(letters, {
-                  opacity: 0,
-                  y: 20,
-                  duration: 1,
-                  stagger: 0.02, // Interval between each letter animation
-                  delay: 2, // Delay the animation by 0.5 seconds
-                  color :"#207E93",
-          });
-      }
-      
-      function revealOnScroll() {
-         
-          var scrollRevealElements = document.querySelectorAll('.scroll-reveal');
-          scrollRevealElements.forEach(function(element) {
-              if (isElementInViewport(element)) {
-                  revealText(element);
-                  // Once the text is revealed, remove the class to prevent revealing it again
-                  element.classList.remove('scroll-reveal');
-              }
-          });
-      }
-      
-      window.addEventListener('scroll', revealOnScroll);
-
-      // show the differents quotes
-
-      $(document).ready(function() {
-          // Initialisation
-          $(".quote-content > div").first().show();
-          $(".dot-content > div").first().addClass("active");
-      
-          // Gestion du clic sur les dots
-          $(".dot").click(function() {
-              var index = $(this).index();
-      
-              // Affichage du contenu correspondant
-              $(".quote-content > div").hide().eq(index).show();
-      
-              // Changement du style des dots
-              $(this).addClass("active").siblings().removeClass("active");
-          });
-      });
-
-    
-
-
-</script>
+  <script src="{{ asset('js/gwl.js') }}"></script>     
+  {# Schedule #}
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+  <script src="{{ asset('js/schedule.js') }}"></script>
+  <script src="https://unpkg.com/scrollama"></script>
 {% endblock %}

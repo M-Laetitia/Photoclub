@@ -25,7 +25,7 @@
                 {% for photo in event.photos %}
                 {% if photo.type != 'photo' %}
                         <figure>
-                        <img src="{{ asset('img/activity/expo/' ~ event.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.alt_description }}"></a>
+                        <img src="{{ asset('img/action/expo/' ~ event.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.alt_description }}"></a>
                         </figure>
                 {% endif %}
                 {% endfor %}
