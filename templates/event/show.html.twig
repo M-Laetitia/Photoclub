@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{area.name}} - PHOTOCLUB {% endblock %}
-{% block meta %}Enter into PHOTOCLUB's upcoming art event details, theme, and highlights. Join fellow art enthusiasts to share, discover, and connect. Learn more about {{area.name}}!{% endblock %}
+{% block title %}{{event.name}} - PHOTOCLUB {% endblock %}
+{% block meta %}Enter into PHOTOCLUB's upcoming art event details, theme, and highlights. Join fellow art enthusiasts to share, discover, and connect. Learn more about {{event.name}}!{% endblock %}
 
 {% block body %}
 
 
 <div class="banner">
     <div class="content">
-        <h1 class="banner-title">{{area.name}}</h1>
+        <h1 class="banner-title">{{event.name}}</h1>
         <div class="subtitle">
             <p class="banner-text">We take care of our cultural distractions</p>
             <div class="underscore-blink"> </div>
@@ -17,58 +17,58 @@
 </div>
 
 <div class="breadcrumb breadcrumb-dark">
-    <p><a href="{{ path('app_home') }}">Home </a> >  <a href="{{ path('app_event') }}">All Events</a> > {{area.name}} </p>
+    <p><a href="{{ path('app_home') }}">Home </a> >  <a href="{{ path('app_event') }}">All Events</a> > {{event.name}} </p>
 </div>
 
 <section class="" id="event-show">
     <div id="header">
-        {% for picture in area.pictures %}
+        {% for photo in event.photos %}
         <figure>
-            <img src="{{ asset('img/action/event/' ~ area.id ~ '/banner/' ~ picture.path) }}" alt="{{ picture.altDescription }}"></a>
+            <img src="{{ asset('img/action/event/' ~ event.id ~ '/banner/' ~ photo.path) }}" alt="{{ photo.altDescription }}"></a>
         </figure>
          {% endfor %}
 
         <div id="quote">
             <span class="quote-style"> &lt; </span>
-            <p id="quote-text">{{area.quote}}</p>
+            <p id="quote-text">{{event.quote}}</p>
             <span class="quote-style">></span>
         </div>
     </div>
 
     <div id="details-event">
         <div id="about-event">
-            <h3 class="text-n1">About the <span id="subtitle">{{area.name}}</span><span class="underscore">_</span></h3>
-            <p>{{area.detail}}</p>
+            <h3 class="text-n1">About the <span id="subtitle">{{event.name}}</span><span class="underscore">_</span></h3>
+            <p>{{event.detail}}</p>
         </div>
     
 
         <div id="info">
-            <p class="text-n2">Info<span id="info-underscore">_</span></p>
+            <p class="text-n2">Info</p>
             <div id="list-infos">
                 <div id="list-info">
 
-                    <div>
-                        <span>Date : </span>  <span></span> <p>{{area.startDate|formatDate}} <span> - </span> {{area.startDate|date('H:i')}}</p>
-                    </div>
+                    {# <div>
+                        <span>Date : </span>   <p>{{event.startDate|format('d.m.Y')}} <span> - </span> {{event.endTime|format('d.m.Y')}}</p> #}
+                    {# </div>  #}
 
                     {# <div>
-                        <span style="visibility:hidden;">Date : </span>  <span></span> <p>{{area.endDate|formatDate}} <span> - </span> {{area.endDate|date('H:i')}}</p>
+                        <span style="visibility:hidden;">Date : </span>  <span></span> <p>{{event.endDate|formatDate}} <span> - </span> {{event.endTime|date('H:i')}}</p>
                     </div> #}
 
-                    <div><span>Capacity :</span> <span></span> <p>{{area.nbReversationMade}}  / {{ area.nbRooms}}  </p> </div>
+                    <div><span>Capacity :</span>  <p> {{ event.nbRooms}}  </p> </div>
 
                     <div><span>Status :</span> <span></span> 
                             <div>
-                                    <span class="status {{ area.status == 'OPEN' ? 'open' : 
-                                    (area.status == 'CLOSED' ? 'closed' : 
-                                    (area.status == 'PENDING' ? 'pending' : 
-                                    (area.status == 'ARCHIVED' ? 'archived' : 'status-default'))) }}">
-                                    {{ area.status }}
+                                    <span class="status {{ event.status == 'OPEN' ? 'open' : 
+                                    (event.status == 'CLOSED' ? 'closed' : 
+                                    (event.status == 'PENDING' ? 'pending' : 
+                                    (event.status == 'ARCHIVED' ? 'archived' : 'status-default'))) }}">
+                                    {{ event.status }}
                                     </span>
                             </div> 
                     </div>
 
-                    <div><span>Access :</span> <span></span> <p>{{area.access}}  </p> </div>
+                    <div><span>Access :</span>  <p>{{event.access}}  </p> </div>
                     
                     
                 </div>
@@ -87,14 +87,15 @@
             {% endif %}
         {% endif %}
 
-            {% if area.nbReversationRemaining == 0 and area.status == 'CLOSED' %}
+            {# {% if event.nbReversationRemaining == 0 and event.status == 'CLOSED' %}
                 <div id="expo-participate">
                         <div id="btn-event">
                                 <div class="button btn-off">PARTICIPATE</div>
                         </div>
                         <p>No more place available for this event.</p>
                 </div>
-            {% elseif area.status == 'CLOSED' %}
+            {% elseif event.status == 'CLOSED' %} #}
+            {% if event.status == 'CLOSED' %} 
             <div id="expo-participate">
                 <div id="expo-participate">
                     <div id="btn-event">
@@ -103,8 +104,8 @@
                     <p>This event is closed.</p>
                 </div>
             </div>
-            {% elseif area.status == 'OPEN' %}
-                {% if area.access == 'private' and not app.user %}
+            {% elseif event.status == 'OPEN' %}
+                {% if event.access == 'private' and not app.user %}
                     {# user is not login and the event is private #}
                     <div id="expo-participate">
                         <div id="btn-event">
@@ -116,7 +117,7 @@
                 {% else %}
                     <div id="expo-participate">
                         <div id="btn-event">
-                            <a href="{{ path('new_event_participation', {'id': area.id }) }}"><div id="btn-participate-expo" class="button btn6">PARTICIPATE</div></a>
+                            <a href="{{ path('event_new_participation', {'id': event.id }) }}"><div id="btn-participate-expo" class="button btn6">PARTICIPATE</div></a>
                         </div>
                     </div>
                 {% endif %}
@@ -126,30 +127,32 @@
     </div>
 
 </section>
-        {% if area.status == 'ARCHIVED' %}
-            <p>pictures</p>
+        {% if event.status == 'ARCHIVED' %}
+            <p>Photos</p>
         {% endif %}
 
 
 
-    {# {% if area.status != 'ARCHIVED' %}
-        {% if area.status == 'PENDING' %}
+    {# {% if event.status != 'ARCHIVED' %}
+        {% if event.status == 'PENDING' %}
             <p>Registration will open soon</p>
         {% else %}
             <p>Do you want to participate ?<br>
             {% if existingParticipation %}
                 <p>You are already participating</p>
-            {% elseif area.nbReversationRemaining == 0 and area.status == 'CLOSED' %}
+            {% elseif event.nbReversationRemaining == 0 and event.status == 'CLOSED' %}
                 <p>No more space available for this exhibition</p>
-            {% elseif area.status == 'OPEN' %}
-                <a href="{{ path('new_event_participation', {'id': area.id }) }}">Click here!</a></p>
+            {% elseif event.status == 'OPEN' %}
+                <a href="{{ path('event_new_participation', {'id': event.id }) }}">Click here!</a></p>
             {% endif %}
             
             </p>
         {% endif %}
     {% endif %} #}
 
-    <script src= "{{ asset('js/gsap.min.js') }}"></script>
+
     <script src= "{{ asset('js/pagesShow.js') }}"></script>
+    <script src= "{{ asset('js/gsap.min.js') }}"></script>
+ 
 
 {% endblock %}

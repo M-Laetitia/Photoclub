@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event reservation{% endblock %}
+{% block meta %}Join our upcoming art event with just a few clicks.{% endblock %}
+
+{% block body %}
+
+<div class="banner">
+    <div class="content">
+        <h1 class="banner-title">{{event.name}}</h1>
+        <div class="subtitle">
+            <p class="banner-text">Be curious</p>
+            <div class="underscore-blink"> </div>
+        </div>
+    </div>
+</div>
+
+{# <style>
+    body {background-color: #151515;}
+</style> #}
+
+<div class="breadcrumb breadcrumb-light">
+    <p><a href="{{ path('app_home') }}">Home </a> >  <a href="{{ path('app_event') }}">All Events</a> > <a href="{{ path('show_event', { slug : event.slug  }) }}">{{event.name}}</a> > Reservation</p>
+</div>
+
+<section class="content register-user" id="participation-page">
+    <div id="register-container">
+        <div id="separator"></div>
+
+        <div class="left-register" id="l-participation">
+            <img src="{{ asset('img/general/silhouette.webp') }}" alt="Silhouette of the photographer.">
+        </div>
+
+        <div class="right-register" id="r-participation">
+            <div id="title-register">
+                <h2>Make a reservation<span class="underscore">_</span></h2>
+                <p><span id="name">{{event.name}}</span><span id="pipe-separator">|</span> {{event.startDate|formatDate}} - {{event.startDate|date('H:i')}}</p>
+            </div>
+
+            {% if app.user %}
+            <div id="form-register">
+
+                {{ form_start(formSendParticipation)}}
+                    {{ form_errors(formSendParticipation)}}
+                    {{ form_row(formSendParticipation.firstname)}}
+                    {{ form_row(formSendParticipation.lastname)}}
+                        {{ form_row(formSendParticipation.submit, { 'attr' : { 'class': 'btn btn6' } })}}
+                {{ form_end(formSendParticipation)}}
+            </div>
+
+            {% else %}
+            <div id="form-register">
+                {{ form_start(formSendParticipationPublic)}}
+                    {{ form_errors(formSendParticipationPublic)}}
+                    {{ form_row(formSendParticipationPublic.firstname)}}
+                    {{ form_row(formSendParticipationPublic.lastname)}}
+                    {{ form_row(formSendParticipationPublic.email)}}
+                        {{ form_row(formSendParticipationPublic.submit, { 'attr' : { 'class': 'btn btn6' } })}}
+                {{ form_end(formSendParticipationPublic)}}
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
