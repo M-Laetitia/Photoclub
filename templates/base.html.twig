@@ -62,13 +62,15 @@
               {#<class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}"> #}
               {#<span class="nav__logo-name"></span><a href="{{ path('app_home') }}">Photoclub</a></span>#}
               <span class="nav__logo-circle"><i class="ri-camera-3-line"></i></span></div>
-              <span class="nav__logo-name"></span>_Photoclub</span>
+              <span class="nav__logo-name"></span>_PHOTOCLUB</span>
             </a>
 
        
             <div class="nav__menu" id="nav-menu">
               <span class="nav__title">Menu</span>
               <h3 class="nav__name">PHOTOCLUB</h3>
+              {# <p>This is the club of professional photographers, students and simply amateurs taking part in events, publishing their photos and inspiring one other.</p>
+              <div class='button btn4'>************************</div> #}
 
 
               <ul class="nav__list">  
@@ -131,19 +133,19 @@
 
         
         {#   --ASIDE-- */#}
-        <aside id="aboutUs">
+        {# <aside id="aboutUs">
             <div>
                 <h3>PHOTOCLUB</h3>
 
                 <p>This is the club of professional photographers, students and simply amateurs taking part in events, publishing their photos and inspiring one other.</p>
-                <div class='button btn4'>************************</div>
+                <div class='button btn4'>************************</div> #}
                 {# <div class="socials">
                     <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
                     <a href="https://www.twitter.com"><i class="fa-brands fa-square-twitter"></i></a>
                     <a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
                 </div>*/#}
-            </div>
-        </aside>
+            {# </div>
+        </aside> #}
 
         {#   --CONTENT-- */#}
 
@@ -195,9 +197,9 @@
                     <a href="#">
                       <figure id="logo-container">
                         <img src="{{ asset('img/logo.png') }}" alt="logo2">
-                        <figcaption>
-                          Photoclub
-                        </figcaption>
+                        <b><figcaption>
+                          PHOTOCLUB
+                        </figcaption></b>
                       </figure>
                     </a>
             
@@ -207,26 +209,28 @@
                   </div>
     
                 <ul class="footer__links">
-                  <li> <a href="{{ path('app_home')}}">HOME</a> </li>
-                  <li>  <a href="{{ path('app_home')}}">ABOUT US</a> </li>
-                  <li>  <a href="{{ path('app_contact')}}">CONTACT</a> </li>
+                  <li> <a href="{{ path('app_home')}}"><b>HOME</b></a> </li>
+                  <li>  <a href="{{ path('app_home')}}"><b>ABOUT US</b></a> </li>
+                  <li>  <a href="{{ path('app_contact')}}"><b>CONTACT</b></a> </li>
                 </ul>
-    
-                <span class="footer__copy">
-                    
-                    <a href="{{ path('app_terms_of_use')}}">Terms of Use</a>
-                    <a href="{{ path('app_privacy_policy')}}">Privacy Policy</a>
-                    <a href="{{ path('app_sitemap')}}">Sitemap</a>
-                    <br>
-                    <br>
-                    <a><small style="font-size: 1.2rem;">©</small>  <span id="footer-date"></span> <span id="name-rights">Photoclub</span>. All used pictures of this site are free of copywrite </a>
-                </span>
+
     
                 <div class="socials" id="footer-socials">
                     <a href="https://www.facebook.com"><i class="fa-brands fa-facebook "></i></a>
                     <a href="https://www.twitter.com"><i class="fa-brands fa-square-twitter"></i></a>
                     <a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
                 </div> 
+
+                    
+                <span class="footer__copy">
+                    
+                  <a href="{{ path('app_terms_of_use')}}"><b>Terms of Use</b></a>
+                  <a href="{{ path('app_privacy_policy')}}"><b>Privacy Policy</b></a>
+                  <a href="{{ path('app_sitemap')}}"><b>Sitemap</b></a>
+                  <br>
+                  <br>
+                  <a><b><small style="font-size: 1.2rem;">©</small></b>  <span id="footer-date"></span><b><span id="name-rights">Photoclub</span>. All used pictures of this site are free of copywrite </b></a>
+                </span>
  
             </div>
 

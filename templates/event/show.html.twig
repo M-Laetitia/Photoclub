@@ -11,7 +11,7 @@
         <h1 class="banner-title">{{event.name}}</h1>
         <div class="subtitle">
             <p class="banner-text">We take care of our cultural distractions</p>
-            <div class="underscore-blink"> </div>
+            {# <div class="underscore-blink"> </div> #}
         </div>
     </div>
 </div>
@@ -28,22 +28,22 @@
         </figure>
          {% endfor %}
 
-        <div id="quote">
+        {# <div id="quote">
             <span class="quote-style"> &lt; </span>
             <p id="quote-text">{{event.quote}}</p>
             <span class="quote-style">></span>
-        </div>
+        </div> #}
     </div>
 
     <div id="details-event">
         <div id="about-event">
-            <h3 class="text-n1">About the <span id="subtitle">{{event.name}}</span><span class="underscore">_</span></h3>
-            <p>{{event.detail}}</p>
+            <h3 class="text-n1">About the <span id="subtitle">{{event.name}}</span></h3>
+            <p><span>Description : </span>{{event.detail}}</p>
         </div>
     
 
         <div id="info">
-            <p class="text-n2">Info</p>
+            {# <p class="text-n2">Details >></p> #}
             <div id="list-infos">
                 <div id="list-info">
 
@@ -99,7 +99,7 @@
             <div id="expo-participate">
                 <div id="expo-participate">
                     <div id="btn-event">
-                            <div class="button btn-off">PARTICIPATE</div>
+                            <div class="button btn-off">CLOSED</div>
                     </div>
                     <p>This event is closed.</p>
                 </div>
@@ -117,7 +117,8 @@
                 {% else %}
                     <div id="expo-participate">
                         <div id="btn-event">
-                            <a href="{{ path('event_new_participation', {'id': event.id }) }}"><div id="btn-participate-expo" class="button btn6">PARTICIPATE</div></a>
+                            {# <a href="{{ path('event_new_participation', {'id': event.id }) }}"><div id="btn-participate-expo" class="button btn6">PARTICIPATE</div></a> #}
+                            <a href="{{ path('app_contact', {'id': event.id })}}">PARTICIPATE</a>
                         </div>
                     </div>
                 {% endif %}

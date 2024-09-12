@@ -10,7 +10,7 @@
         <h1 class="banner-title">{{event.name}}</h1>
         <div class="subtitle">
             <p class="banner-text">Be curious</p>
-            <div class="underscore-blink"> </div>
+            {# <div class="underscore-blink"> </div> #}
         </div>
     </div>
 </div>
@@ -34,7 +34,7 @@
         <div class="right-register" id="r-participation">
             <div id="title-register">
                 <h2>Make a reservation<span class="underscore">_</span></h2>
-                <p><span id="name">{{event.name}}</span><span id="pipe-separator">|</span> {{event.startDate|formatDate}} - {{event.startDate|date('H:i')}}</p>
+                <p><span id="name">{{event.name}}</span><span id="pipe-separator">|</span> {{event.startDate|format('d.m.Y')}} - {{event.endTime|format('d.m.Y')}}</p>
             </div>
 
             {% if app.user %}
